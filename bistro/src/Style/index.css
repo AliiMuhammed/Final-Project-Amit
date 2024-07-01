@@ -23,7 +23,8 @@ html {
   --mainBgColor: #474747;
   --secondBgColor: #1D292E;
   --main-transition: all 0.3s ease-in-out;
-  --main-border-radius: 10px;
+  --main-border-radius: 2rem;
+  --buttonFontColor: #ffff
 }
 
 body {
@@ -68,4 +69,50 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+.main-btn {
+  background-color: var(--mainColor);
+  color: var(--buttonFontColor);
+  padding: 1rem 2rem;
+  border-radius: var(--main-border-radius);
+  display: inline-block;
+  text-transform: capitalize;
+  transition: var(--main-transition);
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+  font-weight: 700;
+}
+
+.main-btn.sm{
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+.main-outline-btn {
+  border: 1px solid var(--mainFontColor);
+  padding: 1rem 2rem;
+  border-radius: var(--main-border-radius);
+  display: inline-block;
+  text-transform: capitalize;
+  transition: var(--main-transition);
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+  color: var(--mainFontColor);
+  font-weight: 700;
+}
+.main-outline-btn.sm{
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+.main-outline-btn:hover{
+  background-color: var(--mainFontColor);
+  color: var(--buttonFontColor);
+}
+.main-btn:hover {
+  background-color: var(--secondaryColor);
 }
