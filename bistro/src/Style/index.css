@@ -1,5 +1,6 @@
 /* start globale rules */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 * {
   -webkit-box-sizing: border-box;
@@ -24,12 +25,15 @@ html {
   --secondBgColor: #1D292E;
   --main-transition: all 0.3s ease-in-out;
   --main-border-radius: 2rem;
-  --buttonFontColor: #ffff
+  --buttonFontColor: #ffff;
+  --mainFontFamily: "DM Sans", sans-serif;
+  --secondFontFamily: "Playfair Display", serif;
+  ;
 }
 
 body {
 
-  font-family: "Cairo", sans-serif;
+  font-family: var(--mainFontFamily);
   color: var(--mainFontColor);
   line-height: 1.6;
 }
@@ -86,7 +90,7 @@ a {
   font-weight: 700;
 }
 
-.main-btn.sm{
+.main-btn.sm {
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
 }
@@ -105,14 +109,17 @@ a {
   color: var(--mainFontColor);
   font-weight: 700;
 }
-.main-outline-btn.sm{
+
+.main-outline-btn.sm {
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
 }
-.main-outline-btn:hover{
+
+.main-outline-btn:hover {
   background-color: var(--mainFontColor);
   color: var(--buttonFontColor);
 }
+
 .main-btn:hover {
   background-color: var(--secondaryColor);
 }
