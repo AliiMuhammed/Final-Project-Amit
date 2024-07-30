@@ -125,3 +125,15 @@ a {
 .main-btn:hover {
   background-color: var(--secondaryColor);
 }
+
+
+
+/* Medium screens (768px - 991px) */
+@media only screen and (max-width: 991px) {
+
+  .main-btn,
+  .main-outline-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.8rem;
+  }
+}
