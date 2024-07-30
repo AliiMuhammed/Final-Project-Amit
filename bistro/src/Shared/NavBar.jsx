@@ -43,7 +43,9 @@ const NavBar = () => {
       <nav>
         <div className="container">
           <div className="site-logo">
-            <img src={logo} alt="site-logo" />
+            <Link to={"/"}>
+              <img src={logo} loading="lazy" alt="logo" />
+            </Link>
           </div>
           <div className={`navgations ${show ? "active" : ""}`}>
             <ul>
