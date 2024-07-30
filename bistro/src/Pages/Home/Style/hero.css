@@ -3,7 +3,7 @@
     background-image: url("../../../Assets/Home/hero-Bg.png");
     background-size: cover;
     background-position: center;
-
+    padding: 0rem;
 }
 
 .hero-section .container {
