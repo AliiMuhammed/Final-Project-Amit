@@ -147,6 +147,24 @@
     }
 }
 
+/* Transition for the icon */
+.main-header nav .container .dropdown-btn svg {
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    animation: rotateReversed 0.3s ease-in-out;
+    -webkit-animation: rotateReversed 0.3s ease-in-out;
+}
+
+/* Rotate icon when active */
+.main-header nav .container .dropdown-btn.active svg {
+    animation: rotate 0.3s ease-in-out;
+    /*Rotate180degrees*/
+    -webkit-animation: rotate 0.3s ease-in-out;
+}
+
 @media only screen and (max-width: 991px) {
     .main-header {
         position: relative;
@@ -238,3 +256,40 @@
 
 /* Large screens (992px and up) */
 @media only screen and (min-width: 992px) {}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReversed {
+    0% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+}
+
+    100% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+}
+}

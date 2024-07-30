@@ -8,7 +8,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
 
 const NavBar = () => {
-  const [show, setShowe] = useState(false);
+  const [show, setShow] = useState(false);
+
   return (
     <header className="main-header">
       <div className="top-header">
@@ -68,7 +69,7 @@ const NavBar = () => {
           </div>
           <button
             className={`dropdown-btn ${show ? "active" : ""}`}
-            onClick={() => setShowe(!show)}
+            onClick={() => setShow(!show)}
           >
             {show ? <IoCloseOutline /> : <RxHamburgerMenu />}
           </button>
