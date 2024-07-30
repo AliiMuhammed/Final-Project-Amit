@@ -28,7 +28,7 @@ html {
   --buttonFontColor: #ffff;
   --mainFontFamily: "DM Sans", sans-serif;
   --secondFontFamily: "Playfair Display", serif;
-  ;
+  --main-white: #fff;
 }
 
 body {
@@ -88,6 +88,7 @@ a {
   -ms-transition: var(--main-transition);
   -o-transition: var(--main-transition);
   font-weight: 700;
+  cursor: pointer;
 }
 
 .main-btn.sm {
@@ -108,6 +109,7 @@ a {
   -o-transition: var(--main-transition);
   color: var(--mainFontColor);
   font-weight: 700;
+  cursor: pointer;
 }
 
 .main-outline-btn.sm {
