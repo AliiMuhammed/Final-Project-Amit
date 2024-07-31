@@ -9,7 +9,13 @@
     align-items: center;
 }
 
-
+.main-header {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+    box-shadow: 0px 3px 10px 4px #00000026;
+}
 
 .main-header .top-header {
     background-color: var(--mainBgColor);
