@@ -1,0 +1,26 @@
+.services-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.services-card .service-img {
+    width: 100%;
+}
+
+.services-card .service-img img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    height: 20rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.services-card h1 {
+    font-size: 1.6rem;
+}

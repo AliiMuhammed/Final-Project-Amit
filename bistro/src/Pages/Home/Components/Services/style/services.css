@@ -1,0 +1,37 @@
+.services-section .container {
+    display: flex;
+
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.services-section .container .main-title {
+    text-align: left;
+    width: 50%;
+    line-height: 1.1;
+}
+
+.services-section .container .services-cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .services-section .container .main-title {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .services-section .container .main-title {
+        width: 75%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1627px) {
+    .services-section .container .main-title {
+        width: 82%;
+    }
+}

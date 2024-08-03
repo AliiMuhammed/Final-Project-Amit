@@ -1,3 +1,8 @@
+.about-section {
+    background-color: var(--sectionBgColor);
+    padding: 8rem 0;
+}
+
 .about-section .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -97,6 +102,7 @@
 /* Medium screens (768px - 991px) */
 @media only screen and (min-width: 1263px) and (max-width: 1495px) {
 
+
     .about-section .container .right .main-title {
         font-size: 3rem;
         width: 100%;
@@ -140,6 +146,10 @@
 
 /* Small screens (up to 767px) */
 @media only screen and (max-width: 767px) {
+    .about-section {
+        padding: 5rem 0;
+    }
+
     .about-section .container .left .about-section-img img {
         width: 100%;
     }
@@ -155,7 +165,8 @@
         left: 50%;
         top: 85%;
     }
-    .about-section .container .left .about-info h1{
+
+    .about-section .container .left .about-info h1 {
         margin: 0;
         font-size: 1.3rem;
     }
