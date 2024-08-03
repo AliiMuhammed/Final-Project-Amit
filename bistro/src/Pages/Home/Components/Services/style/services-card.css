@@ -19,6 +19,19 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    cursor: pointer;
+}
+
+.services-card .service-img img:hover {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
 }
 
 .services-card h1 {
