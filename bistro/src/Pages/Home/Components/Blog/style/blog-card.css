@@ -1,0 +1,42 @@
+.blog-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    background-color: var(--main-white);
+
+}
+
+.blog-card .blog-card-img {
+    width: 100%;
+}
+
+.blog-card .blog-card-img img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+
+}
+
+.blog-card .blog-card-info {
+    padding: 1.5rem;
+    padding-top: 0;
+}
+
+.blog-card .blog-card-info .blog-card-date p {
+    font-size: 1rem;
+    color: var(--mainBgColor);
+    margin-bottom: 1rem;
+}
+
+.blog-card .blog-card-info .blog-card-description p {
+    margin-top: 1rem;
+    color: var(--mainBgColor);
+}
