@@ -70,6 +70,15 @@
     padding: 1rem 0;
 }
 
+.main-header nav .container .site-logo a {
+    width: 100%;
+    display: block;
+}
+
+.main-header nav .container .site-logo a img {
+    width: 100%;
+}
+
 .main-header nav .container .navgations ul {
     display: flex;
     align-items: center;
@@ -105,13 +114,8 @@
 }
 
 
-.main-header nav .container .site-logo {
-    width: 20rem;
-}
 
-.main-header nav .container .site-logo img {
-    width: 100%;
-}
+
 
 .main-header nav .container .dropdown-btn {
     background-color: transparent;
@@ -148,8 +152,10 @@
         gap: .5rem;
     }
 
-    .main-header nav .container .site-logo {
+
+    .main-header nav .container .site-logo a {
         width: 15rem;
+        
     }
 }
 
