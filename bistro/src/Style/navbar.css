@@ -10,11 +10,7 @@
 }
 
 .main-header {
-    position: fixed;
-    width: 100%;
-    z-index: 999;
-    top: 0;
-    box-shadow: 0px 3px 10px 4px #00000026;
+    z-index: 1000;
 }
 
 .main-header .top-header {
@@ -155,7 +151,7 @@
 
     .main-header nav .container .site-logo a {
         width: 15rem;
-        
+
     }
 }
 

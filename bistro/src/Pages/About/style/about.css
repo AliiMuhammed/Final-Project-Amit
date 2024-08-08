@@ -1,0 +1,7 @@
+.about {
+    padding: 0rem;
+}
+
+.about .about-section {
+    background-color: var(--main-white);
+}
