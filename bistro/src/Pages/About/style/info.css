@@ -1,0 +1,124 @@
+.info-section {
+    background-color: var(--sectionBgColor);
+}
+
+.info-section .container {
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    gap: 4rem;
+}
+
+
+.info-section .container .info-right {
+    width: 100%;
+
+}
+
+.info-section .container .info-right img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    height: 100%;
+}
+
+.info-section .container .info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.info-section .container .info-left .restaurant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-section .container .info-left .restaurant-info .main-title {
+    line-height: 1.1;
+    margin: 0;
+    text-align: left;
+}
+
+.info-section .container .info-left .restaurant-info .desc {
+    font-size: 1.2rem;
+}
+
+.info-section .container .info-left .cards-numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+}
+
+.info-section .container .info-left .cards-numbers .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--thirdFontColor);
+    padding: 2rem;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.info-section .container .info-left .cards-numbers .card .title {
+    font-family: var(--secondFontFamily);
+    font-size: 3rem;
+}
+
+.info-section .container .info-left .cards-numbers .card p {
+    font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 991px) {
+    .info-section .container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .info-section .container .info-right img {
+
+        height: 30rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .info-section .container .info-left .cards-numbers .card .title {
+        font-size: 2.5rem;
+    }
+
+    .info-section .container .info-left .cards-numbers .card p {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .info-section .container .info-right img {
+
+        height: 20rem;
+    }
+    .info-section .container .info-left {
+        gap: 2rem;
+    }
+    .info-section .container .info-left .cards-numbers {
+        gap: 1rem;
+    }
+    .info-section .container .info-left .restaurant-info {
+        gap: 1.2rem;
+    }
+    .info-section .container .info-left .restaurant-info .main-title {
+        font-size: 2rem;
+    }
+
+    .info-section .container .info-left .restaurant-info .desc {
+        font-size: 1rem;
+    }
+}
