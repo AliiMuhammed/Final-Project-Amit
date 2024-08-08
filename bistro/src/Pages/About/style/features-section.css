@@ -1,0 +1,31 @@
+.features-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.features-section .container .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    width: 100%;
+}
+
+.features-section .container .features .feature {
+    display: flex;
+    gap: 2rem;
+}
+
+.features-section .container .features .feature h3 {
+    margin-bottom: .5rem;
+}
+
+.features-section .container .features .feature p {
+    width: 80%;
+}
+
+@media only screen and (max-width: 767px) {
+    .features-section .container .features .feature p {
+        width: 100%;
+    }
+}
