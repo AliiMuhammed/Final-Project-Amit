@@ -1,5 +1,6 @@
 .blog-section {
     background-color: var(--sectionBgColor);
+    padding-bottom: 10rem;
 }
 
 .blog-section .container {
