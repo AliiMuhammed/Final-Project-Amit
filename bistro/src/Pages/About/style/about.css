@@ -5,3 +5,11 @@
 .about .about-section {
     background-color: var(--main-white);
 }
+
+.about .testimonials-section {
+    padding-bottom: 10rem;
+}
+
+.about .about-section .main-outline-btn {
+    display: none;
+}

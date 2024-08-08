@@ -1,10 +1,10 @@
 import React from "react";
 import "./style/testimonials.css";
-import MainHeader from "./../../../../Shared/MainHeader";
+import MainHeader from "../MainHeader";
 import TestimonialCard from "./components/TestimonialCard";
-import test_1 from "../../../../Assets/Home/test_1.jpg";
-import test_2 from "../../../../Assets/Home/test_2.jpg";
-import test_3 from "../../../../Assets/Home/test_3.jpg";
+import test_1 from "../../Assets/Home/test_1.jpg";
+import test_2 from "../../Assets/Home/test_2.jpg";
+import test_3 from "../../Assets/Home/test_3.jpg";
 const Testimonials = () => {
   return (
     <section className="testimonials-section">
