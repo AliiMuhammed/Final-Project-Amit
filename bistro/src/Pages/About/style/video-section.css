@@ -1,0 +1,131 @@
+.video-section {
+    height: 80vh;
+    position: relative;
+    margin-bottom: 5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(44, 47, 36, 84%);
+    z-index: 1;
+}
+
+.video-section .video {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.video-section .player-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.video-section .react-player {
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+}
+
+.video-section .container {
+    position: relative;
+    z-index: 2;
+    color: var(--main-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.video-section .container .icon {
+    font-size: 1.3rem;
+    color: var(--mainColor);
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background-color: var(--main-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.video-section .container .main-title {
+    width: 50%;
+    line-height: 1.1;
+    margin: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media only screen and (min-width: 1355px) and (max-width: 1625px) {
+
+
+    .video-section .react-player {
+        position: absolute;
+        bottom: 10%;
+        left: 0;
+    }
+}
+
+@media only screen and (min-width: 1220px) and (max-width: 1354px) {
+
+
+    .video-section .react-player {
+        position: absolute;
+        bottom: 0%;
+        left: 0;
+    }
+}
+
+
+
+@media only screen and (max-width: 1219px) {
+    .video-section .player-wrapper {
+        position: static;
+        padding-top: 0%;
+    }
+
+
+    .video-section .react-player {
+        position: absolute;
+        bottom: 0%;
+        left: 0;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1487px) {
+    .video-section .container .main-title {
+        
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .video-section .container .main-title {
+        font-size: 2rem;
+        width: 100%;
+    }
+}
