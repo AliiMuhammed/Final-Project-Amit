@@ -49,23 +49,26 @@ const NavBar = () => {
           </div>
           <div className={`navgations ${show ? "active" : ""}`}>
             <ul>
-              <li>
+              <li className="nav-link">
                 <NavLink to={"/"}>Home</NavLink>
               </li>
-              <li>
+              <li className="nav-link">
                 <NavLink to={"/about"}>About</NavLink>
               </li>
-              <li>
+              <li className="nav-link">
                 <NavLink to={"/menu"}>Menu</NavLink>
               </li>
-              <li>
+              <li className="nav-link">
                 <NavLink to={"/pages"}>Pages</NavLink>
               </li>
-              <li>
+              <li className="nav-link">
                 <NavLink to={"/contact"}>Contact</NavLink>
               </li>
-              <li>
+              <li className="nav-buttons-small">
                 <button className="main-outline-btn">Book A Table</button>
+                <Link to={"/login"} className="main-btn">
+                  Login
+                </Link>
               </li>
             </ul>
           </div>
@@ -75,7 +78,10 @@ const NavBar = () => {
           >
             {show ? <IoCloseOutline /> : <RxHamburgerMenu />}
           </button>
-          <button className="main-outline-btn">Book A Table</button>
+          <div className="nav-buttons-large">
+            <button className="main-outline-btn">Book A Table</button>
+            <Link to={"/login"} className="main-btn">Login</Link>
+          </div>
         </div>
       </nav>
     </header>

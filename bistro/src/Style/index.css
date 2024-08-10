@@ -90,6 +90,7 @@ a {
   -o-transition: var(--main-transition);
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
 }
 
 .main-btn.sm {
@@ -98,6 +99,7 @@ a {
 }
 
 .main-outline-btn {
+  text-align: center;
   border: 1px solid var(--mainFontColor);
   padding: 1rem 2rem;
   border-radius: var(--main-border-radius);
