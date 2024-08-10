@@ -1,0 +1,58 @@
+.main-page-header {
+    background-color: var(--sectionBgColor);
+    height: 50vh;
+}
+
+.main-page-header .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 0;
+}
+
+.main-page-header .container h1 {
+    font-size: 6.25rem;
+    font-family: var(--secondFontFamily);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.main-page-header .container p {
+    width: 35rem;
+    text-align: center;
+    font-size: 1.125rem;
+}
+
+
+/* Medium screens (768px - 991px) */
+@media only screen and (min-width: 992px) and (max-width: 1264px) {
+    .main-page-header .container h1 {
+        font-size: 5.25rem;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .main-page-header .container h1 {
+        font-size: 4.25rem;
+    }
+
+    .main-page-header .container {
+        gap: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .main-page-header .container p {
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .main-page-header {
+        height: 60vh;
+    }
+
+}

@@ -3,6 +3,7 @@ import App from "./App";
 import Home from "./Pages/Home/Home";
 import NotFound from "./Pages/NotFound/NotFound";
 import About from "./Pages/About/About";
+import Login from "./Pages/Login/Login";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +16,10 @@ export const routes = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
     errorElement: <NotFound />,

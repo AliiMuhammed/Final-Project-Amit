@@ -91,6 +91,7 @@ a {
   font-weight: 700;
   cursor: pointer;
   text-align: center;
+  border: none;
 }
 
 .main-btn.sm {
