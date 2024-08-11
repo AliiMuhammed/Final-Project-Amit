@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style/login.css";
 import MainPageHeader from "../../Shared/MainPageHeader";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 const Login = () => {
+  const [showPass, setShowPass] = useState(false);
   return (
     <section className="login-section">
       <MainPageHeader
@@ -20,8 +23,15 @@ const Login = () => {
 
             <div className="input-field">
               <label htmlFor="password">Password</label>
+              <button
+                className="show-pass"
+                onClick={() => setShowPass(!showPass)}
+                type="button"
+              >
+                {showPass === true ? <FaEye /> : <FaEyeSlash />}
+              </button>
               <input
-                type="password"
+                type={`${showPass === true ? "text" : "password"}`}
                 id="password"
                 placeholder="Enter Password"
               />

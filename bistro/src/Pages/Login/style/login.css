@@ -76,8 +76,34 @@
     font-weight: bold;
 }
 
+.login-section .container .login-form .input-field input {
+    position: relative;
+}
+
+.login-section .container .login-form .input-field .show-pass {
+    background-color: transparent;
+    width: fit-content;
+    border: none;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 8%;
+    bottom: 31%;
+    z-index: 555;
+    color: var(--thirdFontColor);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    cursor: pointer;
+}
+
+.login-section .container .login-form .input-field .show-pass:hover {
+    color: var(--secondaryColor);
+}
+
 @media only screen and (max-width: 991px) {
-    .login-section .container .login-form{
+    .login-section .container .login-form {
         width: 100%;
     }
 }
@@ -85,5 +111,5 @@
 @media only screen and (max-width: 767px) {
     .login-section .container .login-form .input-field input {
         padding: 0.9rem 1.5rem;
-    }    
+    }
 }
