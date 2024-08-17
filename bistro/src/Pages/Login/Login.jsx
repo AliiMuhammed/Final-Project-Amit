@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { openToast } from "../../Redux/Slices/toastSlice";
 import { setAuthUser } from "./../../Helper/Storage";
 import Spinner from "./../../Shared/Spinner";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -62,19 +63,20 @@ const Login = () => {
 
   return (
     <section className="login-section">
-      <MainPageHeader
-        header={"Login"}
-        paragraph={
-          "Welcome back to Bistro Bliss! Sign in to explore our menu, book your table, and enjoy an exceptional dining experience"
-        }
-      />
       <div className="container">
         <div className="login-form">
+          <div className="form-header">
+            <h2>Login</h2>
+            <p>
+              Welcome back to Bistro Bliss! Sign in to explore our menu, book
+              your table, and enjoy an exceptional dining experience
+            </p>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="input-field">
               <label htmlFor="email">Email</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 placeholder="Enter Email"
                 value={email}
@@ -105,7 +107,13 @@ const Login = () => {
                 <p className="error-msg">{errors.password}</p>
               )}
             </div>
-
+            <div className="login-links">
+              <Link to={"/forgot-password"}>forget password</Link>
+              <div className="regester">
+                Don't have an account?
+                <Link to={"/register"}>Sign Up</Link>
+              </div>
+            </div>
             <div className="input-field">
               <button className="main-btn" disabled={loading} type="submit">
                 {loading ? <Spinner className="spinner-w" /> : "Login"}
