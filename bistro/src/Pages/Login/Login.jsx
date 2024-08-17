@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./style/login.css";
-import MainPageHeader from "../../Shared/MainPageHeader";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import http from "../../Helper/http";
 import { useDispatch } from "react-redux";

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./style/register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../../Shared/Spinner";
+import http from "./../../Helper/http";
+import { useDispatch } from "react-redux";
+import { openToast } from "../../Redux/Slices/toastSlice";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +17,8 @@ const Register = () => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -64,6 +69,28 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setLoading(true);
+      http
+        .POST("users/signup", formData)
+        .then((res) => {
+          setLoading(false);
+          dispatch(
+            openToast({ msg: "Registration Successful", type: "success" })
+          );
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            password: "",
+            passwordConfirm: "",
+          });
+          navigate("/login");
+        })
+        .catch((err) => {
+          setLoading(false);
+          dispatch(openToast({ msg: "Something went wrong", type: "error" }));
+        });
       console.log("Form Submitted", formData);
     }
   };
