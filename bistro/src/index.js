@@ -10,11 +10,11 @@ import reportWebVitals from './reportWebVitals';
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  // <Provider store={store}>
-  // </Provider>
+  <Provider store={store}>
     <RouterProvider router={routes}>
       <App />
     </RouterProvider>
+  </Provider>
 );
 
 

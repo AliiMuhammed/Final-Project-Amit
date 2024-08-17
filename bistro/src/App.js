@@ -4,6 +4,7 @@ import MoveToTop from "./Shared/MoveToTop";
 import Backdrop from "./Shared/Backdrop";
 import NavBar from "./Shared/NavBar";
 import Footer from "./Shared/Footer";
+import MyToast from "./Shared/MyToast";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <NavBar/>
         <Outlet />
         <Footer/>
+        <MyToast/>
       </Suspense>
       <MoveToTop />
     </>

@@ -1,0 +1,12 @@
+.spinner-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spinner-container .spinner-r.MuiCircularProgress-root {
+    color: var(--mainColor) !important;
+}
+
+.container .spinner-w.MuiCircularProgress-root {
+    color: var(--main-white) !important;
+}

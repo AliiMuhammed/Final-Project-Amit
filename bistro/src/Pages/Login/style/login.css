@@ -60,6 +60,7 @@
     -o-transition: var(--main-transition);
     outline: none;
     font-size: 1.2rem;
+    width: 100%;
 }
 
 .login-section .container .login-form .input-field input::placeholder {
@@ -76,18 +77,19 @@
     font-weight: bold;
 }
 
-.login-section .container .login-form .input-field input {
+.login-section .container .login-form .input-field .pass-btn {
     position: relative;
 }
 
-.login-section .container .login-form .input-field .show-pass {
+.login-section .container .login-form .input-field .pass-btn .show-pass {
     background-color: transparent;
     width: fit-content;
     border: none;
     font-size: 1.5rem;
     position: absolute;
-    right: 8%;
-    bottom: 31%;
+    right: 4%;
+    top: 55%;
+    transform: translate(-50%, -50%);
     z-index: 555;
     color: var(--thirdFontColor);
     transition: var(--main-transition);
@@ -96,10 +98,25 @@
     -ms-transition: var(--main-transition);
     -o-transition: var(--main-transition);
     cursor: pointer;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
 }
 
 .login-section .container .login-form .input-field .show-pass:hover {
     color: var(--secondaryColor);
+}
+
+.login-section .container .login-form .input-field .error-msg {
+    color: red;
+    font-size: 1rem;
+    margin-left: 2rem;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
 }
 
 @media only screen and (max-width: 991px) {
@@ -111,5 +128,8 @@
 @media only screen and (max-width: 767px) {
     .login-section .container .login-form .input-field input {
         padding: 0.9rem 1.5rem;
+    }
+    .login-section .container .login-form form {
+        gap: 1rem;
     }
 }
