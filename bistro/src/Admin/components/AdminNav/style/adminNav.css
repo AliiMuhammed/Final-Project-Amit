@@ -1,0 +1,47 @@
+.admin-nav {
+    background-color: var(--mainBgColor);
+    color: var(--main-white);
+    padding: 1rem 0;
+}
+
+.admin-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.admin-nav .container .nav-contnet {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.admin-nav .container .nav-contnet .logout-btn.admin-btn {
+    color: var(--main-white);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.admin-nav .container .nav-contnet .logout-btn.admin-btn:hover {
+    color: var(--thirdFontColor);
+}
+
+.admin-nav .container .nav-contnet .admin-img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.admin-nav .container .nav-contnet .admin-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border: 2px solid var(--thirdFontColor);
+}

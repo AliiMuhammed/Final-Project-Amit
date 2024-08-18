@@ -1,0 +1,31 @@
+.admin-section {
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-section .left {
+    flex-grow: 1;
+    max-width: 400px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.admin-section .left.sidebar-closed {
+    max-width: 80px;
+}
+
+.admin-section .right {
+    flex-grow: 2;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}

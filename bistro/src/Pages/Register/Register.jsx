@@ -91,7 +91,6 @@ const Register = () => {
           setLoading(false);
           dispatch(openToast({ msg: "Something went wrong", type: "error" }));
         });
-      console.log("Form Submitted", formData);
     }
   };
 

@@ -5,6 +5,8 @@ import NotFound from "./Pages/NotFound/NotFound";
 import About from "./Pages/About/About";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Admin from "./Admin/Admin";
+import Users from "./Admin/components/Users/Users";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +27,17 @@ export const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "/admin/users",
+        element: <Users />,
       },
     ],
     errorElement: <NotFound />,
