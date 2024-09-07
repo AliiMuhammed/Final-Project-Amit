@@ -30,6 +30,8 @@ html {
   --mainFontFamily: "DM Sans", sans-serif;
   --secondFontFamily: "Playfair Display", serif;
   --main-white: #fff;
+  --main-red: #E50914;
+  --main-green: #46D369;
 }
 
 body {

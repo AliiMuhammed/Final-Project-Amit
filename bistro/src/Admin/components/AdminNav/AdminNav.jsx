@@ -10,15 +10,14 @@ const AdminNav = () => {
     removeAuthUser();
     navigate("/");
   };
-  console.log(user);
   return (
     <nav className="admin-nav">
       <div className="container">
         <div className="nav-contnet">
-          <h3 className="admin-name">{`${user.firstName} ${user.lastName}`}</h3>
+          <h3 className="admin-name">{`${user?.firstName} ${user?.lastName}`}</h3>
           <Link to={"/admin/profile"} className="admin-img">
             <img
-              src={user.fileUrl}
+              src={user?.fileUrl}
               crossOrigin="anonymous"
               alt="admin"
               loading="lazy"

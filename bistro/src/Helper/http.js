@@ -6,7 +6,7 @@ const http = {
     try {
       const token = await getAuthUser(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
       }
 
       const response = await axios.get(url, config);
@@ -22,7 +22,7 @@ const http = {
     try {
       const token = await getAuthUser(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
       }
 
       const response = await axios.post(url, data, config);
@@ -38,7 +38,7 @@ const http = {
     try {
       const token = await getAuthUser(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
       }
 
       const response = await axios.put(url, data, config);
@@ -54,7 +54,7 @@ const http = {
     try {
       const token = await getAuthUser(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
       }
 
       const response = await axios.patch(url, data, config);
@@ -70,7 +70,7 @@ const http = {
     try {
       const token = await getAuthUser(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
       }
 
       const response = await axios.delete(url, config);
