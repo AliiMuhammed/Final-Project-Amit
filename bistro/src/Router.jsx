@@ -7,6 +7,7 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Admin from "./Admin/Admin";
 import Users from "./Admin/components/Users/Users";
+import Menu from './Admin/components/Menu/Menu';
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -38,7 +39,10 @@ export const routes = createBrowserRouter([
       {
         path: "/admin/users",
         element: <Users />,
-      },
+      },{
+        path: "/admin/menu",
+        element: <Menu/>,
+      }
     ],
     errorElement: <NotFound />,
   },

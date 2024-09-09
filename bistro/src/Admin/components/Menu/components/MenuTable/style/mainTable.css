@@ -1,0 +1,119 @@
+.main-table {
+    max-width: 90%;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.main-table table {
+    min-width: 650px;
+}
+
+.main-table thead {
+    background-color: var(--thirdFontColor);
+}
+
+.main-table thead th {
+    font-weight: bold;
+    color: var(--mainFontColor);
+    text-align: center;
+}
+
+.main-table tbody tr {
+    background-color: var(--thirdFontColor);
+}
+
+.main-table tbody tr:nth-of-type(odd) {
+    background-color: #dbdfd0d6;
+    border: 2px solid #d1d4c5;
+    border-left: none;
+    border-right: none;
+}
+
+.main-table tbody tr {
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    cursor: pointer;
+}
+
+.main-table tbody tr:hover {
+    background-color: #1d292e1a;
+}
+
+.main-table tbody tr td {
+    font-size: 1rem;
+    color: var(--mainFontColor);
+    text-align: center;
+}
+
+.main-table tbody tr td:first-child {
+    padding: 0.5rem 1rem;
+}
+
+.main-table .table-img {
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.main-table .table-img img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.main-table .table-btns {
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+}
+
+.main-table .table-btns button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    padding: 1rem 2rem;
+    color: #fff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.main-table .table-btns .delete-btn {
+    background-color: var(--mainColor);
+}
+
+.main-table .table-btns .delete-btn:hover {
+    background-color: var(--secondaryColor);
+}
+
+.main-table .table-btns .edit-btn {
+    background-color: var(--secondBgColor);
+}
+
+.main-table .table-btns .edit-btn:hover {
+    background-color: var(--mainBgColor);
+}
+
+
+.pagination {
+    color: var(--mainFontColor);
+    background-color: var(--thirdFontColor);
+    width: 100%;
+}

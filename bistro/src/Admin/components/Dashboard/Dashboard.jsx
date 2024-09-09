@@ -42,7 +42,7 @@ const Dashboard = ({ toggleSidebarClass }) => {
             </NavLink>
           </li>
           <li className="link">
-            <NavLink to={"/"}>
+            <NavLink to={"/admin/menu"}>
               <div className="icon">
                 <MdRestaurantMenu />
               </div>

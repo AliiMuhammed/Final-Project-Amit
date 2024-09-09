@@ -9,14 +9,14 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
+import EditMenu from "../MenuDialogs/EditMenu";
+import DeleteMenu from "../MenuDialogs/DeleteMenu";
 import "./style/mainTable.css";
-import EditUser from "../UserDialogs/EditUser";
-import DeleteUser from "../UserDialogs/DeleteUser";
 
-const UsersTable = ({ data, headers }) => {
-  const [openEditUser, setOpenEditUser] = useState(false);
-  const [openDeleteUser, setOpenDeleteUser] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+const MenuTable = ({ headers, data }) => {
+  const [openEditItem, setOpenEditItem] = useState(false);
+  const [openDeleteItem, setOpenDeleteItem] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -27,17 +27,17 @@ const UsersTable = ({ data, headers }) => {
     setPage(0);
   };
 
-  const handleEditClick = (user) => {
-    setSelectedUser(user);
-    setOpenEditUser(true);
+  const handleEditClick = (item) => {
+    setSelectedItem(item);
+    setOpenEditItem(true);
   };
 
-  const handleDeleteClick = (user) => {
-    setSelectedUser(user);
-    setOpenDeleteUser(true);
+  const handleDeleteClick = (item) => {
+    setSelectedItem(item);
+    setOpenDeleteItem(true);
   };
 
-  // Memoize paginated data to prevent unnecessary recalculations
+  // Memoize paginated data to avoid recalculating on every render
   const paginatedData = useMemo(
     () => data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [data, page, rowsPerPage]
@@ -55,13 +55,13 @@ const UsersTable = ({ data, headers }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((user, rowIndex) => (
+            {paginatedData.map((item, rowIndex) => (
               <TableRow key={rowIndex}>
                 <TableCell>
                   <div className="table-img">
                     <img
-                      alt={`${user.firstName} ${user.lastName}`}
-                      src={user.fileUrl}
+                      alt={item.name}
+                      src={item.fileUrl}
                       loading="lazy"
                       crossOrigin="anonymous"
                       className="img-placeholder"
@@ -69,24 +69,24 @@ const UsersTable = ({ data, headers }) => {
                   </div>
                 </TableCell>
 
-                <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.phone}</TableCell>
-                <TableCell>{user.role}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.description}</TableCell>
+                <TableCell>{`$ ${item.price}`}</TableCell>
+                <TableCell>{item.category}</TableCell>
 
                 <TableCell>
                   <div className="table-btns">
                     <button
                       className="delete-btn"
-                      onClick={() => handleDeleteClick(user)}
-                      aria-label="Delete user"
+                      onClick={() => handleDeleteClick(item)}
+                      aria-label="Delete item"
                     >
                       Delete
                     </button>
                     <button
                       className="edit-btn"
-                      onClick={() => handleEditClick(user)}
-                      aria-label="Edit user"
+                      onClick={() => handleEditClick(item)}
+                      aria-label="Edit item"
                     >
                       Edit
                     </button>
@@ -109,18 +109,18 @@ const UsersTable = ({ data, headers }) => {
         />
       </TableContainer>
 
-      <EditUser
-        open={openEditUser}
-        setOpen={setOpenEditUser}
-        user={selectedUser}
+      <EditMenu
+        open={openEditItem}
+        setOpen={setOpenEditItem}
+        item={selectedItem}
       />
-      <DeleteUser
-        open={openDeleteUser}
-        setOpen={setOpenDeleteUser}
-        user={selectedUser}
+      <DeleteMenu
+        open={openDeleteItem}
+        setOpen={setOpenDeleteItem}
+        item={selectedItem}
       />
     </>
   );
 };
 
-export default UsersTable;
+export default MenuTable;
