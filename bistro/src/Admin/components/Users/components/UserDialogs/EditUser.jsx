@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { openToast } from "../../../../../Redux/Slices/toastSlice";
 import Spinner from "../../../../../Shared/Spinner";
 import CustomAlert from "../../../../../Shared/CustomAlert";
+import { validateFormData } from "./validationHelpers";
+import { MESSAGES } from "./messages";
 
 const EditUser = ({ open, setOpen, user }) => {
   const dispatch = useDispatch();
@@ -23,76 +25,77 @@ const EditUser = ({ open, setOpen, user }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [noChangesError, setNoChangesError] = useState(""); // New state for no changes error
+
+  // Set form data when user prop changes
   useEffect(() => {
     if (user) {
-      setFormData({
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        email: user.email || "",
-        phone: user.phone || "",
-      });
+      resetForm();
     }
   }, [user]);
 
-  const handleChange = (e) => {
+  // Reset form data
+  const resetForm = () => {
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleClose = () => {
-    setFormData({
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      email: user.email || "",
-      phone: user.phone || "",
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
     });
     setErrors({});
     setErr("");
+    setNoChangesError(""); // Reset the no-changes error
+  };
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
+    setNoChangesError(""); // Clear the no-changes error when form is edited
+  };
+
+  // Compare formData with user data to check for changes
+  const hasFormChanged = () => {
+    return (
+      formData.firstName !== user?.firstName ||
+      formData.lastName !== user?.lastName ||
+      formData.email !== user?.email ||
+      formData.phone !== user?.phone
+    );
+  };
+
+  // Close the dialog and reset form
+  const handleClose = () => {
+    resetForm();
     setOpen(false);
   };
 
-  // Validation logic
-  const validate = () => {
-    const newErrors = {};
-
-    // Check if fields are empty
-    if (!formData.firstName.trim())
-      newErrors.firstName = "*First name is required";
-    if (!formData.lastName.trim())
-      newErrors.lastName = "*Last name is required";
-    if (!formData.email.trim()) newErrors.email = "*Email is required";
-    if (!formData.phone.trim()) newErrors.phone = "*Phone number is required";
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = "*Invalid email format";
-    }
-
-    // Validate Egyptian phone number (11 digits starting with 010, 011, 012, or 015)
-    const egyptianPhoneRegex = /^(010|011|012|015)\d{8}$/;
-    if (formData.phone && !egyptianPhoneRegex.test(formData.phone)) {
-      newErrors.phone =
-        "*Invalid phone number. Must start with 010, 011, 012, or 015 and be 11 digits long.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Returns true if no errors
-  };
-
-  const handleUpdate = () => {
+  // Form submit handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setLoading(true);
-    if (validate()) {
+
+    // Check if form data has changed
+    if (!hasFormChanged()) {
+      setLoading(false);
+      setNoChangesError("You must change the user data before updating."); // Set the error message
+      return;
+    }
+
+    const newErrors = validateFormData(formData);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
       http
-        .PATCH("users/" + user._id, formData)
-        .then((response) => {
+        .PATCH(`users/${user._id}`, formData)
+        .then(() => {
           setLoading(false);
           dispatch(triggerRefresh());
           dispatch(
             openToast({
-              msg: "User updated successfully",
+              msg: MESSAGES.updateSuccess,
               type: "success",
             })
           );
@@ -100,8 +103,15 @@ const EditUser = ({ open, setOpen, user }) => {
         })
         .catch((error) => {
           setLoading(false);
-          setErr("Failed to update user");
+          const errorMsg = error.response?.data?.message || MESSAGES.updateFail;
+          setErr(errorMsg);
+
+          if (process.env.NODE_ENV === "development") {
+            console.error("Error updating user:", error);
+          }
         });
+    } else {
+      setLoading(false);
     }
   };
 
@@ -111,13 +121,17 @@ const EditUser = ({ open, setOpen, user }) => {
       onClose={handleClose}
       className="edit-dialog-form"
       scroll="paper"
-      fullWidth={true}
+      fullWidth
     >
       <DialogTitle>Edit User</DialogTitle>
       <DialogContent>
-        {err !== "" && <CustomAlert msg={err} type={"error"} />}
+        {err && <CustomAlert msg={err} type={"error"} />}
+        {/* New error message for no changes */}
+        {noChangesError && (
+          <CustomAlert msg={noChangesError} type={"warning"} />
+        )}
         <div className="edit-form">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="input-field">
               <label htmlFor="firstName">First Name</label>
               <input
@@ -127,6 +141,7 @@ const EditUser = ({ open, setOpen, user }) => {
                 value={formData.firstName}
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={loading}
               />
               {errors.firstName && (
                 <span className="error-msg">{errors.firstName}</span>
@@ -141,6 +156,7 @@ const EditUser = ({ open, setOpen, user }) => {
                 value={formData.lastName}
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={loading}
               />
               {errors.lastName && (
                 <span className="error-msg">{errors.lastName}</span>
@@ -155,6 +171,7 @@ const EditUser = ({ open, setOpen, user }) => {
                 value={formData.email}
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={loading}
               />
               {errors.email && (
                 <span className="error-msg">{errors.email}</span>
@@ -169,6 +186,7 @@ const EditUser = ({ open, setOpen, user }) => {
                 value={formData.phone}
                 onChange={handleChange}
                 autoComplete="off"
+                disabled={loading}
               />
               {errors.phone && (
                 <span className="error-msg">{errors.phone}</span>
@@ -181,16 +199,16 @@ const EditUser = ({ open, setOpen, user }) => {
         <button
           className="main-outline-btn edit-dialog-btn"
           onClick={handleClose}
+          disabled={loading}
         >
           Cancel
         </button>
         <button
           className="main-btn edit-dialog-btn"
-          onClick={handleUpdate}
-          autoFocus
+          onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? <Spinner className={"spinner-w"} /> : "Update"}
+          {loading ? <Spinner className="spinner-w" /> : "Update"}
         </button>
       </DialogActions>
     </Dialog>
