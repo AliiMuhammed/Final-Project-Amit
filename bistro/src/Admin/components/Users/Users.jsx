@@ -5,7 +5,10 @@ import http from "./../../../Helper/http";
 import UsersTable from "./components/UsersTable/UsersTable";
 import Spinner from "./../../../Shared/Spinner";
 import CustomAlert from "../../../Shared/CustomAlert";
+import { useSelector } from "react-redux";
+
 const Users = () => {
+  const refreshCount = useSelector((state) => state.refresh);
   const [users, setUsers] = useState({
     loading: false,
     data: [],
@@ -25,7 +28,7 @@ const Users = () => {
           errMsg: err.response?.data?.message,
         });
       });
-  }, []);
+  }, [refreshCount]);
   return (
     <section className="users-section">
       <div className="container">
@@ -39,7 +42,7 @@ const Users = () => {
         {users.data.length > 0 && !users.loading && (
           <UsersTable
             data={users.data}
-            headers={["Image", "Name", "Email", "Role", "Action"]}
+            headers={["Image", "Name", "Email", "Phone", "Role", "Action"]}
           />
         )}
       </div>

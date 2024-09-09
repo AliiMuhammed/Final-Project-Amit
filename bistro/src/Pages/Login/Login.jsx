@@ -49,13 +49,12 @@ const Login = () => {
           setLoading(false);
           dispatch(openToast({ msg: "Login Successful", type: "success" }));
           navigate("/");
-          navigate(0);
           setAuthUser(res);
         })
         .catch((err) => {
           setLoading(false);
           dispatch(openToast({ msg: "Something went wrong", type: "error" }));
-          console.log(err);
+        
         });
     }
   };

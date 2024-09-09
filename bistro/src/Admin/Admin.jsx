@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import AdminNav from "./components/AdminNav/AdminNav";
 import AdminFooter from "./components/AdminFooter/AdminFooter";
 import { Outlet } from "react-router";
+import MyToast from "../Shared/MyToast";
 const Admin = () => {
   const [isSidebarClosed, setIsSidebarClosed] = useState(true);
 
@@ -22,6 +23,7 @@ const Admin = () => {
           <AdminFooter />
         </div>
       </section>
+      <MyToast />
     </>
   );
 };

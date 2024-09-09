@@ -16,7 +16,6 @@ const NavBar = () => {
 
   const handleLogout = () => {
     removeAuthUser();
-    navigate(0);
     navigate("/");
   };
 

@@ -9,9 +9,14 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import "./style/mainTable.css"; // Ensure this path is correct
+import "./style/mainTable.css";
+import EditUser from "../UserDialogs/EditUser";
+import DeleteUser from "../UserDialogs/DeleteUser";
 
 const UsersTable = ({ data, headers }) => {
+  const [openEditUser, setOpenEditUser] = useState(false);
+  const [openDeleteUser, setOpenDeleteUser] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -24,69 +29,98 @@ const UsersTable = ({ data, headers }) => {
     setPage(0);
   };
 
+  const handleEditClick = (user) => {
+    setSelectedUser(user); // Set the user that was clicked
+    setOpenEditUser(true); // Open the edit dialog
+  };
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user); // Set the user that was clicked
+    setOpenDeleteUser(true); // Open the edit dialog
+  };
+
   const paginatedData = data.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
-    <TableContainer component={Paper} className="main-table">
-      <Table>
-        <TableHead>
-          <TableRow>
-            {headers.map((header, index) => (
-              <TableCell key={index}>{header}</TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {paginatedData.map((user, rowIndex) => (
-            <TableRow key={rowIndex}>
-              {/* Image */}
-              <TableCell>
-                <div className="table-img">
-                  <img
-                    alt={`${user.firstName} ${user.lastName}`}
-                    src={user.fileUrl}
-                    loading="lazy"
-                    crossOrigin="anonymous"
-                  />
-                </div>
-              </TableCell>
-
-              {/* Name */}
-              <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
-
-              {/* Email */}
-              <TableCell>{user.email}</TableCell>
-
-              {/* Role */}
-              <TableCell>{user.role}</TableCell>
-
-              {/* Action */}
-              <TableCell>
-                <div className="table-btns">
-                  <button className="delete-btn">Delete</button>
-                  <button className="edit-btn">Edit</button>
-                </div>
-              </TableCell>
+    <>
+      <TableContainer component={Paper} className="main-table">
+        <Table>
+          <TableHead>
+            <TableRow>
+              {headers.map((header, index) => (
+                <TableCell key={index}>{header}</TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {paginatedData.map((user, rowIndex) => (
+              <TableRow key={rowIndex}>
+                <TableCell>
+                  <div className="table-img">
+                    <img
+                      alt={`${user.firstName} ${user.lastName}`}
+                      src={user.fileUrl}
+                      loading="lazy"
+                      crossOrigin="anonymous"
+                    />
+                  </div>
+                </TableCell>
 
-      {/* Pagination */}
-      <TablePagination
-        component="div"
-        count={data.length}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-        className="pagination"
+                <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.phone}</TableCell>
+                <TableCell>{user.role}</TableCell>
+
+                <TableCell>
+                  <div className="table-btns">
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteClick(user)}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEditClick(user)} // Handle edit click
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <TablePagination
+          component="div"
+          count={data.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+          className="pagination"
+        />
+      </TableContainer>
+
+      {/* Pass selected user data to EditUser */}
+      <EditUser
+        open={openEditUser}
+        setOpen={setOpenEditUser}
+        user={selectedUser} // Pass selected user data here
       />
-    </TableContainer>
+      {/* End of EditUser */}
+      {/* pass selected user data to DeleteUser */}
+      <DeleteUser
+        open={openDeleteUser}
+        setOpen={setOpenDeleteUser}
+        user={selectedUser}
+      />
+      {/* End of DeleteUser */}
+    </>
   );
 };
 
