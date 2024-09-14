@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./style/menu.css";
 import { useSelector } from "react-redux";
-import Spinner from "./../../../Shared/Spinner";
+import Spinner from "../../../Shared/Spinner";
 import CustomAlert from "../../../Shared/CustomAlert";
-import http from "./../../../Helper/http";
+import http from "../../../Helper/http";
 import MenuTable from "./components/MenuTable/MenuTable";
 import AddMenu from "./components/MenuDialogs/AddMenu";
 
-const Menu = () => {
+const AdminMenu = () => {
   const refreshCount = useSelector((state) => state.refresh);
   const [openAddItem, setOpenAddItem] = useState(false);
   const [menu, setMenu] = useState({
@@ -41,7 +41,10 @@ const Menu = () => {
           <>
             <div className="add-header">
               <h2>Menu Items</h2>
-              <button className="main-btn add-menu-btn" onClick={() => setOpenAddItem(true)}>
+              <button
+                className="main-btn add-menu-btn"
+                onClick={() => setOpenAddItem(true)}
+              >
                 Add Item
               </button>
             </div>
@@ -52,7 +55,10 @@ const Menu = () => {
           <>
             <div className="add-header">
               <h2>Menu Items</h2>
-              <button className="main-btn add-menu-btn" onClick={() => setOpenAddItem(true)}>
+              <button
+                className="main-btn add-menu-btn"
+                onClick={() => setOpenAddItem(true)}
+              >
                 Add Item
               </button>
             </div>
@@ -75,4 +81,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default AdminMenu;
