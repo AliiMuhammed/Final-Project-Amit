@@ -1,0 +1,360 @@
+.menu-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.menu-section .container .menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.menu-section .container .menu-header h1 {
+    font-family: var(--secondFontFamily);
+    font-size: 6.25rem;
+    font-weight: lighter;
+    text-transform: capitalize;
+}
+
+.menu-section .container .menu-header p {
+    font-size: 1.2rem;
+    width: 60%;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.menu-section .container .menu-tags {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.menu-section .container .menu-tags::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-section .container .menu-tags {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.menu-section .container .menu-tags .main-btn.menu-tag {
+    background-color: transparent;
+    color: var(--mainFontColor);
+    border: 1px solid var(--thirdFontColor);
+    font-weight: 600;
+}
+
+.menu-section .container .menu-tags .main-btn.menu-tag:hover {
+    background-color: var(--mainColor);
+    color: var(--buttonFontColor);
+}
+
+.menu-section .container .menu-tags .main-btn.menu-tag.active {
+    background-color: var(--mainColor);
+    color: var(--buttonFontColor);
+}
+
+.menu-section .container .menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.menu-section .container .menu-items .menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--thirdFontColor);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    box-shadow: 0 0 0 0 #00000000;
+    width: 100%;
+}
+
+.menu-section .container .menu-items .menu-item:hover {
+    transform: translateY(-6px);
+    -webkit-transform: translateY(-6px);
+    -moz-transform: translateY(-6px);
+    -ms-transform: translateY(-6px);
+    -o-transform: translateY(-6px);
+    box-shadow: 0 0 3px 0px #00000047;
+}
+
+.menu-section .container .menu-items .menu-item .menu-item-img {
+    width: 100%;
+    height: 250px;
+}
+
+.menu-section .container .menu-items .menu-item .menu-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.menu-section .container .menu-items .menu-item .menu-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 2rem;
+    text-align: center;
+
+}
+
+.menu-section .container .menu-items .menu-item .menu-item-info .menu-price {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--mainColor);
+}
+
+.menu-section .container .menu-items .menu-item .menu-item-info .menu-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+
+.order-section {
+    background-color: var(--sectionBgColor);
+
+}
+
+.order-section .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+}
+
+.order-section .container .left .food-delvery {
+    display: flex;
+    justify-content: center;
+    gap: 2.3rem 1.7rem;
+    flex-wrap: wrap;
+}
+
+.order-section .container .left .food-delvery .food-card {
+    width: 250px;
+    background-color: var(--buttonFontColor);
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    box-shadow: 0 0 7px 0 #6464641c;
+}
+
+.order-section .container .left .food-delvery .food-card:nth-child(4),
+.order-section .container .left .food-delvery .food-card:nth-child(5),
+.order-section .container .left .food-delvery .food-card:nth-child(6) {
+    width: 270px;
+}
+
+
+
+.order-section .container .left .food-delvery .food-card img {
+    width: 11rem;
+}
+
+
+.order-section .container .right {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.order-section .container .right h1 {
+    font-family: var(--secondFontFamily);
+    font-size: 3.4375rem;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.order-section .container .right p {
+    width: 350px;
+}
+
+/* Medium screens (768px - 991px) */
+@media only screen and (max-width: 991px) {
+    .menu-section .container .menu-tags .main-btn.menu-tag {
+        padding: 0.7rem 2rem;
+    }
+
+    .menu-section .container .menu-tags {
+        overflow-x: auto;
+        justify-content: center;
+    }
+
+    .menu-section .container .menu-header p {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .menu-section .container .menu-header h1 {
+        font-size: 3.25rem;
+    }
+}
+
+
+
+/* Small screens (up to 767px) */
+@media only screen and (max-width: 767px) {
+    .menu-section .container .menu-tags {
+        justify-content: flex-start;
+    }
+}
+
+
+
+@media only screen and (min-width: 991px) and (max-width: 1215px) {
+    .menu-section .container .menu-header p {
+        width: 80%;
+    }
+
+    .menu-section .container .menu-header h1 {
+        font-size: 4.25rem;
+    }
+}
+
+
+@media only screen and (min-width: 1647px) and (max-width: 1854px) {
+    .order-section .container {
+
+        gap: 2rem;
+    }
+
+    .order-section .container .left .food-delvery {
+        gap: 2rem 1rem;
+    }
+
+    .order-section .container .left .food-delvery .food-card {
+        width: 220px;
+    }
+
+    .order-section .container .left .food-delvery .food-card:nth-child(4),
+    .order-section .container .left .food-delvery .food-card:nth-child(5),
+    .order-section .container .left .food-delvery .food-card:nth-child(6) {
+        width: 250px;
+    }
+
+    .order-section .container .left .food-delvery .food-card img {
+        width: 9rem;
+    }
+
+}
+
+@media only screen and (min-width: 1493px) and (max-width: 1646px) {
+    .order-section .container {
+
+        gap: 1rem;
+    }
+
+    .order-section .container .left .food-delvery {
+        gap: 1.5rem .8rem;
+    }
+
+    .order-section .container .left .food-delvery .food-card {
+        width: 200px;
+    }
+
+    .order-section .container .left .food-delvery .food-card:nth-child(4),
+    .order-section .container .left .food-delvery .food-card:nth-child(5),
+    .order-section .container .left .food-delvery .food-card:nth-child(6) {
+        width: 230px;
+    }
+
+    .order-section .container .left .food-delvery .food-card img {
+        width: 8rem;
+    }
+
+    .order-section .container .right h1 {
+        font-family: var(--secondFontFamily);
+        font-size: 3rem;
+        line-height: 1.1;
+        font-weight: 500;
+    }
+
+    .order-section .container .right p {
+        width: 350px;
+    }
+}
+
+@media only screen and (max-width: 1492px) {
+    .order-section .container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .order-section .container .left .food-delvery {
+        gap: 1.5rem .8rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+
+    .order-section .container .left .food-delvery .food-card {
+        width: 100%;
+    }
+
+    .order-section .container .left .food-delvery .food-card:nth-child(4),
+    .order-section .container .left .food-delvery .food-card:nth-child(5),
+    .order-section .container .left .food-delvery .food-card:nth-child(6) {
+        width: 100%;
+    }
+
+    .order-section .container .left .food-delvery .food-card img {
+        width: 8rem;
+    }
+
+    .order-section .container .right {
+        text-align: center;
+        align-items: center;
+    }
+
+    .order-section .container .right h1 {
+        font-size: 3rem;
+    }
+
+    .order-section .container .right p {
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .order-section .container {
+        gap: 2rem;
+    }
+    .order-section .container .right h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .order-section .container .right p {
+        width: 100%;
+    }
+}
