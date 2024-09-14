@@ -3,14 +3,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import "../../../../../Style/edit-dialog-form.css"; // Adjust path as needed
-import http from "../../../../../Helper/http"; // Adjust path as needed
-import { openToast } from "../../../../../Redux/Slices/toastSlice"; // Adjust path as needed
+import "../../../../../Style/edit-dialog-form.css"; 
+import http from "../../../../../Helper/http"; 
+import { openToast } from "../../../../../Redux/Slices/toastSlice"; 
 import { useDispatch } from "react-redux";
-import Spinner from "../../../../../Shared/Spinner"; // Adjust path as needed
-import CustomAlert from "../../../../../Shared/CustomAlert"; // Adjust path as needed
-import { validateFormData } from "./addValidationHelper"; // Adjust path as needed
-import { MESSAGES } from "./messages"; // Adjust path as needed
+import Spinner from "../../../../../Shared/Spinner"; 
+import CustomAlert from "../../../../../Shared/CustomAlert"; 
+import { validateFormData } from "./addValidationHelper"; 
+import { MESSAGES } from "./messages"; 
 import { triggerRefresh } from "../../../../../Redux/Slices/refreshSlice";
 
 const AddMenu = ({ open, setOpen }) => {
@@ -40,7 +40,7 @@ const AddMenu = ({ open, setOpen }) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       photo: e.target.files[0], // Set the uploaded image file
-    }));
+    })); 
   };
 
   // Close the dialog and reset form
@@ -176,14 +176,19 @@ const AddMenu = ({ open, setOpen }) => {
             </div>
             <div className="input-field">
               <label htmlFor="category">Category</label>
-              <input
-                type="text"
+              <select
                 id="category"
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
                 disabled={loading}
-              />
+              >
+                <option value="">Select Category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Main Dishes">Main Dishes</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Desserts">Desserts</option>
+              </select>
               {errors.category && (
                 <span className="error-msg">{errors.category}</span>
               )}

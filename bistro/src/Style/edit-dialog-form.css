@@ -29,7 +29,37 @@
 .edit-dialog-form .edit-form form .input-field input:focus {
     border-color: var(--mainColor);
 }
-.edit-dialog-form .edit-form form .input-field textarea{
+
+.edit-dialog-form .edit-form form .input-field select {
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid var(--thirdFontColor);
+    border-radius: 7px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.edit-dialog-form .edit-form form .input-field select:focus {
+    border-color: var(--mainColor);
+}
+
+.edit-dialog-form .edit-form form .input-field select option {
+    padding: 1rem;
+    outline: none;
+    border: 1px solid var(--thirdFontColor);
+    border-radius: 7px;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    cursor: pointer;
+}
+
+.edit-dialog-form .edit-form form .input-field textarea {
     padding: 0.5rem 1rem;
     outline: none;
     border: 1px solid var(--thirdFontColor);

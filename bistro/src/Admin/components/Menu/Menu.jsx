@@ -41,7 +41,7 @@ const Menu = () => {
           <>
             <div className="add-header">
               <h2>Menu Items</h2>
-              <button className="main-btn" onClick={() => setOpenAddItem(true)}>
+              <button className="main-btn add-menu-btn" onClick={() => setOpenAddItem(true)}>
                 Add Item
               </button>
             </div>
@@ -52,7 +52,7 @@ const Menu = () => {
           <>
             <div className="add-header">
               <h2>Menu Items</h2>
-              <button className="main-btn" onClick={() => setOpenAddItem(true)}>
+              <button className="main-btn add-menu-btn" onClick={() => setOpenAddItem(true)}>
                 Add Item
               </button>
             </div>

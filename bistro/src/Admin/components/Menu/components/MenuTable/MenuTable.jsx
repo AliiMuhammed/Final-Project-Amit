@@ -70,7 +70,13 @@ const MenuTable = ({ headers, data }) => {
                 </TableCell>
 
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.description}</TableCell>
+                <TableCell>
+                  <span title={item.description}>
+                    {item.description.length > 40
+                      ? `${item.description.slice(0, 40)}...`
+                      : item.description}
+                  </span>
+                </TableCell>
                 <TableCell>{`$ ${item.price}`}</TableCell>
                 <TableCell>{item.category}</TableCell>
 
