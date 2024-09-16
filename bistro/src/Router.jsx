@@ -8,7 +8,8 @@ import Register from "./Pages/Register/Register";
 import Admin from "./Admin/Admin";
 import Users from "./Admin/components/Users/Users";
 import AdminMenu from "./Admin/components/Menu/AdminMenu";
-import Menu from './Pages/Menu/Menu';
+import Menu from "./Pages/Menu/Menu";
+import ContactUs from "./Pages/Contact/ContactUs";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +34,10 @@ export const routes = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
     ],
     errorElement: <NotFound />,
