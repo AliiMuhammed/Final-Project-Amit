@@ -1,51 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
 import MainPageHeader from "../../Shared/MainPageHeader";
+import { validateBookingForm } from "./components/FormValidation";
 import "./style/booking.css";
+import { getAuthUser } from "../../Helper/Storage";
+
 const Booking = () => {
+  const user = getAuthUser();
+  console.log(user);
+  const [values, setValues] = useState({
+    name: "",
+    phone: "",
+    date: "",
+    time: "",
+    person: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setValues({ ...values, [id]: value });
+  };
+
+  const handleSelectChange = (e) => {
+    const { id, value } = e.target;
+    setValues({ ...values, [id]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateBookingForm(values);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      // Submit form
+      console.log("Form submitted successfully", values);
+    }
+  };
+
   return (
     <>
       <MainPageHeader
         header="Book A Table"
-        paragraph={
-          "Discover delectable cuisine and unforgettable moments in our welcoming, culinary haven."
-        }
+        paragraph="Discover delectable cuisine and unforgettable moments in our welcoming, culinary haven."
       />
       <section className="booking-section">
         <div className="container">
-          <form className="booking-form">
+          <form className="booking-form" onSubmit={handleSubmit}>
             <div className="two-inline-inputs">
               <div className="input-field">
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" placeholder="Enter your name" />
+                <input
+                  type="text"
+                  id="name"
+                  value={values.name}
+                  onChange={handleInputChange}
+                  placeholder="Enter your name"
+                />
+                {errors.name && <p className="error-msg">{errors.name}</p>}
               </div>
               <div className="input-field">
-                <label htmlFor="phone"> Phone</label>
-                <input type="tel" id="phone" placeholder="+20 000 000000" />
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={values.phone}
+                  onChange={handleInputChange}
+                  placeholder="+20 000 000000"
+                />
+                {errors.phone && <p className="error-msg">{errors.phone}</p>}
               </div>
             </div>
 
             <div className="two-inline-inputs">
               <div className="input-field">
                 <label htmlFor="date">Date</label>
-                <input type="date" id="date" placeholder="Date" />
+                <input
+                  type="date"
+                  id="date"
+                  value={values.date}
+                  onChange={handleInputChange}
+                  placeholder="Date"
+                />
+                {errors.date && <p className="error-msg">{errors.date}</p>}
               </div>
               <div className="input-field">
                 <label htmlFor="time">Time</label>
-                <input type="time" id="time" placeholder="time" />
+                <input
+                  type="time"
+                  id="time"
+                  value={values.time}
+                  onChange={handleInputChange}
+                  placeholder="time"
+                />
+                {errors.time && <p className="error-msg">{errors.time}</p>}
               </div>
             </div>
 
             <div className="input-field">
               <label htmlFor="person">Total Persons</label>
-              <select name="person" id="person">
+              <select
+                name="person"
+                id="person"
+                value={values.person}
+                onChange={handleSelectChange}
+              >
                 <option value="">Select</option>
                 <option value="1">1 Person</option>
                 <option value="2">2 Person</option>
                 <option value="3">3 Person</option>
                 <option value="4">4 Person</option>
                 <option value="5">5 Person</option>
-                <option value="5">+5 Person</option>
+                <option value="6">+5 Person</option>
               </select>
+              {errors.person && <p className="error-msg">{errors.person}</p>}
             </div>
 
             <div className="input-field">
@@ -61,9 +130,9 @@ const Booking = () => {
             width="100%"
             height="100%"
             style={{ border: 0 }}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
             title="map"
           ></iframe>
         </div>

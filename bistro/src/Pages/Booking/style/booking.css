@@ -53,6 +53,10 @@
     width: 100%;
 }
 
+.booking-form .main-btn {
+    margin-top: 1rem;
+}
+
 .booking-form select option {
     font-weight: bold;
     background-color: var(--mainColor);
@@ -95,10 +99,11 @@
 
     .booking-form input,
     .booking-form select {
-        padding: 1rem ;
+        padding: 1rem;
         font-size: 1rem;
         width: 100%;
     }
+
     .booking-form .input-field label {
         font-size: 1rem;
     }
