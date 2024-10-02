@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+// Booking.js
+import React, { useState, useEffect } from "react";
 import MainPageHeader from "../../Shared/MainPageHeader";
 import { validateBookingForm } from "./components/FormValidation";
-import "./style/booking.css";
 import { getAuthUser } from "../../Helper/Storage";
+import LoginDialog from "./components/LoginDialog";
+import "./style/booking.css";
 
 const Booking = () => {
   const user = getAuthUser();
-  console.log(user);
   const [values, setValues] = useState({
     name: "",
     phone: "",
@@ -16,6 +17,7 @@ const Booking = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [open, setOpen] = useState(false); 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -26,15 +28,17 @@ const Booking = () => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
   };
-
+  useEffect(() => {
+    if (!user) {
+      setOpen(true);
+    }
+  }, [user]);
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const validationErrors = validateBookingForm(values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // Submit form
       console.log("Form submitted successfully", values);
     }
   };
@@ -124,6 +128,7 @@ const Booking = () => {
             </div>
           </form>
         </div>
+
         <div className="map-section">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.665798566837!2d14.4263948!3d35.8982436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMjInMzUuMCJTIDQwMDAwIiBQaOG6pXQgTmFt!5e0!3m2!1sen!2s!4v1664144671938!5m2!1sen!2s"
@@ -136,6 +141,8 @@ const Booking = () => {
             title="map"
           ></iframe>
         </div>
+
+        <LoginDialog open={open} onClose={() => setOpen(false)} />
       </section>
     </>
   );
