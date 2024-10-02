@@ -61,30 +61,52 @@ const NavBar = () => {
           <div className={`navgations ${show ? "active" : ""}`}>
             <ul>
               <li className="nav-link">
-                <NavLink to={"/"} onClick={closeNav}>Home</NavLink>
+                <NavLink to={"/"} onClick={closeNav}>
+                  Home
+                </NavLink>
               </li>
               <li className="nav-link">
-                <NavLink to={"/about"} onClick={closeNav}>About</NavLink>
+                <NavLink to={"/about"} onClick={closeNav}>
+                  About
+                </NavLink>
               </li>
               <li className="nav-link">
-                <NavLink to={"/menu"} onClick={closeNav}>Menu</NavLink>
+                <NavLink to={"/menu"} onClick={closeNav}>
+                  Menu
+                </NavLink>
               </li>
               <li className="nav-link">
-                <NavLink to={"/pages"} onClick={closeNav}>Pages</NavLink>
+                <NavLink to={"/pages"} onClick={closeNav}>
+                  Pages
+                </NavLink>
               </li>
               <li className="nav-link">
-                <NavLink to={"/contact"} onClick={closeNav}>Contact</NavLink>
+                <NavLink to={"/contact"} onClick={closeNav}>
+                  Contact
+                </NavLink>
               </li>
               <li className="nav-link book-table">
-                <NavLink to={"/book-table"} onClick={closeNav}>Book A Table</NavLink>
+                <NavLink to={"/booking"} onClick={closeNav}>
+                  Book A Table
+                </NavLink>
               </li>
               <li className="nav-buttons-small">
                 {user ? (
                   <>
-                    <Link to={"/profile"} className="user-profile" onClick={closeNav}>
+                    <Link
+                      to={"/profile"}
+                      className="user-profile"
+                      onClick={closeNav}
+                    >
                       <img crossOrigin="anonymous" src={user?.fileUrl} alt="" />
                     </Link>
-                    <button onClick={() => { handleLogout(); closeNav(); }} className="logout-btn">
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        closeNav();
+                      }}
+                      className="logout-btn"
+                    >
                       <HiOutlineLogout />
                     </button>
                   </>
@@ -103,13 +125,29 @@ const NavBar = () => {
             {show ? <IoCloseOutline /> : <RxHamburgerMenu />}
           </button>
           <div className="nav-buttons-large">
-            <button className="main-outline-btn" onClick={closeNav}>Book A Table</button>
+            <NavLink
+              to={"/booking"}
+              className="main-outline-btn"
+              onClick={closeNav}
+            >
+              Book A Table
+            </NavLink>
             {user ? (
               <>
-                <Link to={"/profile"} className="user-profile" onClick={closeNav}>
+                <Link
+                  to={"/profile"}
+                  className="user-profile"
+                  onClick={closeNav}
+                >
                   <img crossOrigin="anonymous" src={user?.fileUrl} alt="" />
                 </Link>
-                <button onClick={() => { handleLogout(); closeNav(); }} className="logout-btn">
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    closeNav();
+                  }}
+                  className="logout-btn"
+                >
                   <HiOutlineLogout />
                 </button>
               </>

@@ -10,6 +10,7 @@ import Users from "./Admin/components/Users/Users";
 import AdminMenu from "./Admin/components/Menu/AdminMenu";
 import Menu from "./Pages/Menu/Menu";
 import ContactUs from "./Pages/Contact/ContactUs";
+import Booking from "./Pages/Booking/Booking";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +40,10 @@ export const routes = createBrowserRouter([
       //   path: "/contact",
       //   element: <ContactUs />,
       // },
+      {
+        path: "/booking",
+        element: <Booking />,
+      },
     ],
     errorElement: <NotFound />,
   },

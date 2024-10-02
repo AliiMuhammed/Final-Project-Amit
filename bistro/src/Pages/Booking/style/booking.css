@@ -1,0 +1,105 @@
+.booking-section {
+    padding: 0;
+}
+
+.booking-section .map-section {
+    height: 60vh;
+}
+
+.booking-section .container {
+    position: relative;
+}
+
+.booking-form {
+    position: absolute;
+    width: 45rem;
+    background-color: var(--main-white);
+    padding: 2rem;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    box-shadow: 0 0 6px 0px #00000024;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.booking-form input,
+.booking-form select {
+    padding: 1rem 1.5rem;
+    border-radius: var(--main-border-radius);
+    -webkit-border-radius: var(--main-border-radius);
+    -moz-border-radius: var(--main-border-radius);
+    -ms-border-radius: var(--main-border-radius);
+    -o-border-radius: var(--main-border-radius);
+    border: none;
+    border: 1px solid var(--thirdFontColor);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    outline: none;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.booking-form select option {
+    font-weight: bold;
+    background-color: var(--mainColor);
+    color: var(--main-white);
+}
+
+.booking-form select option:hover {
+    background-color: var(--secondaryFontColor);
+
+}
+
+.booking-form .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.booking-form .two-inline-inputs {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.booking-form .input-field label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 991px) {}
+
+@media only screen and (max-width: 767px) {
+    .booking-form {
+        width: 100%;
+    }
+
+    .booking-form .two-inline-inputs {
+        flex-direction: column;
+    }
+
+    .booking-form input,
+    .booking-form select {
+        padding: 1rem ;
+        font-size: 1rem;
+        width: 100%;
+    }
+    .booking-form .input-field label {
+        font-size: 1rem;
+    }
+}

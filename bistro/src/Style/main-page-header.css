@@ -1,5 +1,6 @@
 .main-page-header {
     background-color: var(--sectionBgColor);
+    height: 75vh;
 }
 
 .main-page-header .container {
@@ -14,7 +15,7 @@
 .main-page-header .container h1 {
     font-size: 6rem;
     font-family: var(--secondFontFamily);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     z-index: 1;
 }
@@ -45,6 +46,14 @@
 }
 
 @media only screen and (max-width: 767px) {
+    .main-page-header .container h1 {
+        font-size: 3.65rem;
+    }
+
+    .main-page-header {
+        padding: 0;
+    }
+
     .main-page-header .container p {
         width: 100%;
         text-align: center;
@@ -52,7 +61,7 @@
     }
 
     .main-page-header {
-        height: 60vh;
+      
     }
 
 }
