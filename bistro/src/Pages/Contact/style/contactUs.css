@@ -32,9 +32,9 @@
 
 .contact-us-section .header-form-container {
     background-color: var(--sectionBgColor);
-    margin-bottom: 12rem;
+    margin-bottom: 5rem;
     position: relative;
-    height: 85vh;
+    height: 100vh;
 }
 
 .contact-us-section .container {
@@ -58,18 +58,22 @@
     gap: .5rem;
     width: 220px;
 }
-.contact-us-section .container .contact-info h3{
+
+.contact-us-section .container .contact-info h3 {
     font-size: 1.5rem;
     text-transform: capitalize;
 }
-.contact-us-section .container .contact-info p{
+
+.contact-us-section .container .contact-info p {
     font-weight: 500;
 }
-.contact-us-section .container .contact-info .phone{
+
+.contact-us-section .container .contact-info .phone {
     color: var(--mainColor);
     font-weight: bold;
     font-size: 1.5rem;
 }
+
 .contact-us-section .contact-form {
     width: 100%;
 
@@ -192,15 +196,19 @@
     .main-page-header .container {
         gap: 1.5rem;
     }
-    .contact-us-section .contact-form .container form{
+
+    .contact-us-section .contact-form .container form {
         width: 100%;
     }
-    .contact-us-section .contact-form .container form{
+
+    .contact-us-section .contact-form .container form {
         padding: 2rem;
     }
-    
-    .contact-us-section .header-form-container{
-        height: 90vh;
+
+    .contact-us-section .header-form-container {
+        height: 100vh;
+        margin-bottom: 10rem;
+
     }
 }
 
@@ -217,12 +225,19 @@
         top: 39rem;
 
     }
-    .contact-us-section .contact-form .container form{
+
+    .contact-us-section .contact-form .container form {
         padding: 1.5rem;
     }
+
     .contact-us-section .contact-form .container form .name-email-container {
         flex-direction: column;
     }
-    
-   
+
+    .contact-us-section .header-form-container {
+       
+        margin-bottom: 13rem;
+
+    }
+
 }

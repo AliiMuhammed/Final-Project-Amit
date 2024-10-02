@@ -35,10 +35,10 @@ export const routes = createBrowserRouter([
         path: "/menu",
         element: <Menu />,
       },
-      {
-        path: "/contact",
-        element: <ContactUs />,
-      },
+      // {
+      //   path: "/contact",
+      //   element: <ContactUs />,
+      // },
     ],
     errorElement: <NotFound />,
   },
