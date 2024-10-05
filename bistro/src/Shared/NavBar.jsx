@@ -13,7 +13,6 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const user = getAuthUser()?.data?.user;
   const navigate = useNavigate();
-
   const handleLogout = () => {
     removeAuthUser();
     navigate("/");
@@ -94,7 +93,7 @@ const NavBar = () => {
                 {user ? (
                   <>
                     <Link
-                      to={"/profile"}
+                      to={`/profile/${user.id}`}
                       className="user-profile"
                       onClick={closeNav}
                     >
@@ -135,7 +134,7 @@ const NavBar = () => {
             {user ? (
               <>
                 <Link
-                  to={"/profile"}
+                  to={`/profile/${user.id}`}
                   className="user-profile"
                   onClick={closeNav}
                 >

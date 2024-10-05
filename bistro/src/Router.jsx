@@ -11,6 +11,12 @@ import AdminMenu from "./Admin/components/Menu/AdminMenu";
 import Menu from "./Pages/Menu/Menu";
 import ContactUs from "./Pages/Contact/ContactUs";
 import Booking from "./Pages/Booking/Booking";
+import Profile from "./Pages/Profile/Profile";
+import AdminHome from "./Admin/components/AdminHome/AdminHome";
+import AdminBooking from "./Admin/components/AdminBooking/AdminBooking";
+import Guest from "./Middleware/Guest";
+import GuestProfile from "./Middleware/GuestProfile";
+import AdminMiddleware from "./Middleware/AdminMiddleware";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -25,13 +31,19 @@ export const routes = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/login",
-        element: <Login />,
+        element: <Guest />,
+        children: [
+          {
+            path: "/login",
+            element: <Login />,
+          },
+          {
+            path: "/register",
+            element: <Register />,
+          },
+        ],
       },
-      {
-        path: "/register",
-        element: <Register />,
-      },
+
       {
         path: "/menu",
         element: <Menu />,
@@ -44,22 +56,53 @@ export const routes = createBrowserRouter([
         path: "/booking",
         element: <Booking />,
       },
+      {
+        element: <GuestProfile />,
+        children: [
+          {
+            path: "/profile/:id",
+            element: <Profile />,
+          },
+        ],
+      },
     ],
     errorElement: <NotFound />,
   },
   {
-    path: "/admin",
-    element: <Admin />,
+    element: <AdminMiddleware />,
     children: [
       {
-        path: "/admin/users",
-        element: <Users />,
-      },
-      {
-        path: "/admin/menu",
-        element: <AdminMenu />,
+        path: "/admin",
+        element: <Admin />,
+        children: [
+          {
+            path: "/admin",
+            element: <AdminHome />,
+          },
+          {
+            path: "/admin/users",
+            element: <Users />,
+          },
+          {
+            path: "/admin/menu",
+            element: <AdminMenu />,
+          },
+          {
+            path: "/admin/booking",
+            element: <AdminBooking />,
+          },
+          {
+            element: <GuestProfile />,
+            children: [
+              {
+                path: "/admin/profile/:id",
+                element: <Profile />,
+              },
+            ],
+          },
+        ],
+        errorElement: <NotFound />,
       },
     ],
-    errorElement: <NotFound />,
   },
 ]);

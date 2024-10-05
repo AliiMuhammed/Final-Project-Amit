@@ -4,7 +4,7 @@ import logo from "../../../Assets/w-logo.png";
 import logoIcon from "../../../Assets/w-icon-logo.png";
 import { IoCloseOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { FaUsers, FaBook } from "react-icons/fa";
+import { FaUsers, FaBook, FaHome } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
 
 const Dashboard = ({ toggleSidebarClass }) => {
@@ -34,6 +34,14 @@ const Dashboard = ({ toggleSidebarClass }) => {
       <div className="side-bar-body">
         <ul className="links">
           <li className="link">
+            <NavLink to={"/admin"}>
+              <div className="icon">
+                <FaHome />
+              </div>
+              <span>Home</span>
+            </NavLink>
+          </li>
+          <li className="link">
             <NavLink to={"/admin/users"}>
               <div className="icon">
                 <FaUsers />
@@ -50,11 +58,11 @@ const Dashboard = ({ toggleSidebarClass }) => {
             </NavLink>
           </li>
           <li className="link">
-            <NavLink to={"/"}>
+            <NavLink to={"/admin/booking"}>
               <div className="icon">
                 <FaBook />
               </div>
-              <span>Tables</span>
+              <span>Booking</span>
             </NavLink>
           </li>
         </ul>

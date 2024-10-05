@@ -1,0 +1,50 @@
+.profile-section {
+    padding-top: 0;
+}
+
+.user-info {
+    background-color: var(--sectionBgColor);
+    padding: 5rem 0;
+}
+
+.user-info .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.user-info .container .user-img {
+    width: 13rem;
+    height: 13rem;
+}
+
+.user-info .container .user-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--mainColor);
+}
+
+.user-info .container .user-img .edit-profile {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: var(--mainColor);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+.user-info .container .user-img .edit-profile:hover{
+    color: var(--secondaryColor);
+}
+.user-info .container .user-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--mainColor);
+}

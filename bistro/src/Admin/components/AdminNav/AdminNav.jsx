@@ -15,7 +15,7 @@ const AdminNav = () => {
       <div className="container">
         <div className="nav-contnet">
           <h3 className="admin-name">{`${user?.firstName} ${user?.lastName}`}</h3>
-          <Link to={"/admin/profile"} className="admin-img">
+          <Link to={`/admin/profile/${user.id}`} className="admin-img">
             <img
               src={user?.fileUrl}
               crossOrigin="anonymous"
