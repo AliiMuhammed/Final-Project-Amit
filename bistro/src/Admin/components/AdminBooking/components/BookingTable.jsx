@@ -45,7 +45,7 @@ const BookingTable = ({ headers, data }) => {
       return "Invalid Date";
     }
 
-    return dateObj.toLocaleString();
+    return dateObj.toLocaleDateString('en-GB');  
   };
 
   const handleReject = (id) => {
