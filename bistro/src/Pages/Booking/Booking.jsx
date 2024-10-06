@@ -1,10 +1,13 @@
-// Booking.js
 import React, { useState, useEffect } from "react";
 import MainPageHeader from "../../Shared/MainPageHeader";
 import { validateBookingForm } from "./components/FormValidation";
 import { getAuthUser } from "../../Helper/Storage";
 import LoginDialog from "./components/LoginDialog";
 import "./style/booking.css";
+import http from "../../Helper/http";
+import Spinner from "../../Shared/Spinner";
+import { useDispatch } from "react-redux";
+import { openToast } from "../../Redux/Slices/toastSlice";
 
 const Booking = () => {
   const user = getAuthUser();
@@ -13,11 +16,13 @@ const Booking = () => {
     phone: "",
     date: "",
     time: "",
-    person: "",
+    numOfPersons: "",
   });
 
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -28,18 +33,69 @@ const Booking = () => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
   };
+
+  const formatTime = (time) => {
+    const [hours, minutes] = time.split(":");
+    const date = new Date();
+    date.setHours(hours, minutes);
+    return date.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+  const formatDateToISO = (date) => {
+    const dateObj = new Date(date);
+    return dateObj.toISOString().split("T")[0]; // This returns the date in 'YYYY-MM-DD' format
+  };
+
+
   useEffect(() => {
     if (!user) {
       setOpen(true);
     }
   }, [user]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateBookingForm(values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Form submitted successfully", values);
+      setLoading(true);
+      const formattedValues = {
+        ...values,
+        date: formatDateToISO(values.date),
+        time: formatTime(values.time),
+      };
+      http
+        .POST("bookings", formattedValues)
+        .then((res) => {
+          setLoading(false);
+          setValues({
+            name: "",
+            phone: "",
+            date: "",
+            time: "",
+            numOfPersons: "",
+          });
+          setErrors({});
+          dispatch(openToast({ msg: "Booking successful", type: "success" }));
+        })
+        .catch((err) => {
+          setLoading(false);
+          setValues({
+            name: "",
+            phone: "",
+            date: "",
+            time: "",
+            numOfPersons: "",
+          });
+          setErrors({});
+          dispatch(openToast({ msg: "Something went wrong", type: "error" }));
+        });
+      console.log("Form submitted successfully", formattedValues);
     }
   };
 
@@ -96,34 +152,34 @@ const Booking = () => {
                   id="time"
                   value={values.time}
                   onChange={handleInputChange}
-                  placeholder="time"
+                  placeholder="Time"
                 />
                 {errors.time && <p className="error-msg">{errors.time}</p>}
               </div>
             </div>
 
             <div className="input-field">
-              <label htmlFor="person">Total Persons</label>
+              <label htmlFor="numOfPersons">Total Persons</label>
               <select
-                name="person"
-                id="person"
-                value={values.person}
+                name="numOfPersons"
+                id="numOfPersons"
+                value={values.numOfPersons}
                 onChange={handleSelectChange}
               >
                 <option value="">Select</option>
                 <option value="1">1 Person</option>
-                <option value="2">2 Person</option>
-                <option value="3">3 Person</option>
-                <option value="4">4 Person</option>
-                <option value="5">5 Person</option>
-                <option value="6">+5 Person</option>
+                <option value="2">2 Persons</option>
+                <option value="3">3 Persons</option>
+                <option value="4">4 Persons</option>
+                <option value="5">5 Persons</option>
+                <option value="6">+5 Persons</option>
               </select>
-              {errors.person && <p className="error-msg">{errors.person}</p>}
+              {errors.numOfPersons && <p className="error-msg">{errors.numOfPersons}</p>}
             </div>
 
             <div className="input-field">
               <button className="main-btn" type="submit">
-                Book Now
+                {loading ? <Spinner className={"spinner-w"} /> : "Book Now"}
               </button>
             </div>
           </form>

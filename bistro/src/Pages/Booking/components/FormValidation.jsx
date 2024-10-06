@@ -33,8 +33,8 @@ export const validateBookingForm = (values) => {
       }
     }
   
-    if (!values.person || values.person === "") {
-      errors.person = "Please select the total number of persons.";
+    if (!values.numOfPersons || values.numOfPersons === "") {
+      errors.numOfPersons = "Please select the total number of Persons.";
     }
   
     return errors;
