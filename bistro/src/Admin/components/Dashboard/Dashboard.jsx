@@ -34,7 +34,7 @@ const Dashboard = ({ toggleSidebarClass }) => {
       <div className="side-bar-body">
         <ul className="links">
           <li className="link">
-            <NavLink to={"/admin"}>
+            <NavLink to={"/admin/home"}>
               <div className="icon">
                 <FaHome />
               </div>

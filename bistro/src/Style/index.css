@@ -132,6 +132,9 @@ a {
   background-color: var(--secondaryColor);
 }
 
+.main-Alert {
+  width: 100%;
+}
 
 
 /* Medium screens (768px - 991px) */

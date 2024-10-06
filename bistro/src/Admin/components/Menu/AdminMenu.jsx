@@ -33,7 +33,7 @@ const AdminMenu = () => {
   }, [refreshCount]);
 
   return (
-    <section className="menu-section">
+    <section className="admin-menu-section">
       <div className="container">
         {menu.loading && <Spinner className={"spinner-r"} size={"large"} />}
         {menu.errMsg && <CustomAlert msg={menu.errMsg} type={"error"} />}

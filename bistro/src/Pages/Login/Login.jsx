@@ -48,13 +48,16 @@ const Login = () => {
         .then((res) => {
           setLoading(false);
           dispatch(openToast({ msg: "Login Successful", type: "success" }));
-          navigate("/");
+          if (res.data?.user?.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
           setAuthUser(res);
         })
         .catch((err) => {
           setLoading(false);
           dispatch(openToast({ msg: "Something went wrong", type: "error" }));
-        
         });
     }
   };

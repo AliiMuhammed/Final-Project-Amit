@@ -1,11 +1,11 @@
-.menu-section .container {
+.admin-menu-section .container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.menu-section .container .add-header {
+.admin-menu-section .container .add-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,7 @@
     width: 100%;
 }
 
-.menu-section .container .add-header .add-menu-btn {
+.admin-menu-section .container .add-header .add-menu-btn {
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

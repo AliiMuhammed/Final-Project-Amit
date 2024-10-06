@@ -17,6 +17,8 @@ import AdminBooking from "./Admin/components/AdminBooking/AdminBooking";
 import Guest from "./Middleware/Guest";
 import GuestProfile from "./Middleware/GuestProfile";
 import AdminMiddleware from "./Middleware/AdminMiddleware";
+import { Navigate } from 'react-router-dom';
+
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -76,7 +78,12 @@ export const routes = createBrowserRouter([
         element: <Admin />,
         children: [
           {
-            path: "/admin",
+            path: "", // this matches the /admin route exactly
+            element: <Navigate to="/admin/home" replace />,
+          },
+
+          {
+            path: "/admin/home",
             element: <AdminHome />,
           },
           {
