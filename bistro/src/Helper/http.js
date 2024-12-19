@@ -1,12 +1,12 @@
 import axios from "axios";
-import { getAuthUser } from "./Storage";
+import { getUserToken } from "./Storage";
 
 const http = {
   GET: async (url, config = {}) => {
     try {
-      const token = await getAuthUser(); 
+      const token = await getUserToken(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
 
       const response = await axios.get(url, config);
@@ -20,9 +20,9 @@ const http = {
 
   POST: async (url, data = {}, config = {}) => {
     try {
-      const token = await getAuthUser(); 
+      const token = await getUserToken(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
 
       const response = await axios.post(url, data, config);
@@ -36,9 +36,9 @@ const http = {
 
   PUT: async (url, data = {}, config = {}) => {
     try {
-      const token = await getAuthUser(); 
+      const token = await getUserToken(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
 
       const response = await axios.put(url, data, config);
@@ -52,9 +52,9 @@ const http = {
 
   PATCH: async (url, data = {}, config = {}) => {
     try {
-      const token = await getAuthUser(); 
+      const token = await getUserToken(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
 
       const response = await axios.patch(url, data, config);
@@ -68,9 +68,9 @@ const http = {
 
   DELETE: async (url, config = {}) => {
     try {
-      const token = await getAuthUser(); 
+      const token = await getUserToken(); 
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       }
 
       const response = await axios.delete(url, config);

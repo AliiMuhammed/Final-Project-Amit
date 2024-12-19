@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { openToast } from "../../Redux/Slices/toastSlice";
 import { setAuthUser } from "./../../Helper/Storage";
+import { setUserToken } from "./../../Helper/Storage";
 import Spinner from "./../../Shared/Spinner";
 import { Link } from "react-router-dom";
 
@@ -53,7 +54,8 @@ const Login = () => {
           } else {
             navigate("/");
           }
-          setAuthUser(res);
+          setAuthUser(res.data.user);
+          setUserToken(res.token);
         })
         .catch((err) => {
           setLoading(false);

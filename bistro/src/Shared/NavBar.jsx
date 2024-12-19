@@ -6,15 +6,20 @@ import logo from "../Assets/logo.png";
 import "../Style/navbar.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
-import { getAuthUser, removeAuthUser } from "../Helper/Storage";
+import {
+  getAuthUser,
+  removeAuthUser,
+  removeUserToken,
+} from "../Helper/Storage";
 import { HiOutlineLogout } from "react-icons/hi";
 
 const NavBar = () => {
   const [show, setShow] = useState(false);
-  const user = getAuthUser()?.data?.user;
+  const user = getAuthUser();
   const navigate = useNavigate();
   const handleLogout = () => {
     removeAuthUser();
+    removeUserToken();
     navigate("/");
   };
 

@@ -121,18 +121,31 @@
     background-color: var(--thirdFontColor);
     width: 100%;
 }
-.Confirmed{
-    color: rgb(2, 196, 2);
+
+.Confirmed,
+.Declined,
+.In-progress {
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
     font-weight: bold;
+    width: 8rem;
+    display: block;
+    color: var(--main-white);
 }
 
-.Declined{
-    color: red; 
-    font-weight: bold;
-}
-.In-progress{
-    color: orange; 
-    font-weight: bold;
+.Confirmed {
+    background-color: rgb(2, 196, 2);
 }
 
+.Declined {
+    background-color: red;
 
+}
+
+.In-progress {
+    background-color: orange;
+}

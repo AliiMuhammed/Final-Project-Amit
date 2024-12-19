@@ -4,7 +4,7 @@ import "./style/adminNav.css";
 import { getAuthUser, removeAuthUser } from "../../../Helper/Storage";
 import { Link, useNavigate } from "react-router-dom";
 const AdminNav = () => {
-  const user = getAuthUser()?.data?.user;
+  const user = getAuthUser();
   const navigate = useNavigate();
   const logout = () => {
     removeAuthUser();
