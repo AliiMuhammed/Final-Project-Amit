@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style/profile.css";
-import { getAuthUser,setAuthUser } from "../../Helper/Storage";
+import { getAuthUser, setAuthUser } from "../../Helper/Storage";
 import { FaEdit } from "react-icons/fa";
 import http from "./../../Helper/http";
-import Spinner from "../../Shared/Spinner";
-import CustomAlert from "../../Shared/CustomAlert";
 import MainHeader from "../../Shared/MainHeader";
 import { useDispatch } from "react-redux";
 import { openToast } from "../../Redux/Slices/toastSlice";
+import EditCurrentUser from "./components/EditCurrentUser";
+import BookingTable from "./components/BookingTable";
 const Profile = () => {
   const dispatch = useDispatch();
   const user = getAuthUser();
@@ -16,7 +16,7 @@ const Profile = () => {
     data: [],
     errMsg: "",
   });
-
+  const [openEditUser, setOpenEditUser] = useState(false);
   const handleEditImage = () => {
     const inputElement = document.createElement("input");
     inputElement.type = "file";
@@ -42,7 +42,7 @@ const Profile = () => {
               })
             );
             // Update local user object with new image
-            setAuthUser( response.data.user );
+            setAuthUser(response.data.user);
             window.location.reload(); // Refresh page to reflect the new image
           })
           .catch((err) => {
@@ -81,20 +81,8 @@ const Profile = () => {
     return dateObj.toLocaleDateString("en-GB");
   };
 
-  const ReadableDateAndTime = (isoDate) => {
-    const dateObj = new Date(isoDate);
-    if (isNaN(dateObj.getTime())) {
-      return "Invalid Date";
-    }
-    return (
-      dateObj.toLocaleDateString() +
-      " " +
-      dateObj.toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      })
-    );
+  const handleEditClick = () => {
+    setOpenEditUser(true);
   };
 
   return (
@@ -118,7 +106,10 @@ const Profile = () => {
               <h1 className="user-name">
                 {user.firstName} {user.lastName}
               </h1>
-              <button className="edit-profile">
+              <button
+                onClick={() => handleEditClick(user)}
+                className="edit-profile"
+              >
                 <FaEdit />
               </button>
             </div>
@@ -143,51 +134,12 @@ const Profile = () => {
         </div>
       </div>
       <MainHeader header={"My Bookings"} />
-      <div className="user-bookings">
-        <div className="container">
-          {bookings.loading && (
-            <Spinner className={"spinner-r"} size={"large"} />
-          )}
-          {bookings.errMsg && (
-            <CustomAlert msg={bookings.errMsg} type={"error"} />
-          )}
-          {bookings.data.length === 0 && !bookings.loading && (
-            <CustomAlert msg={"No Bookings found"} type={"info"} />
-          )}
-          {bookings.data.length > 0 && (
-            <div className="table-wrapper">
-              <table className="bookings-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Created At</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bookings.data.map((booking, index) => (
-                    <tr key={booking._id}>
-                      <td className="booking-icon">{index + 1}</td>
-                      <td>{booking.name}</td>
-                      <td>{convertToReadableDate(booking.date)}</td>
-                      <td>{booking.time}</td>
-                      <td>{ReadableDateAndTime(booking.createdAt)}</td>
-                      <td>
-                        <span className={`status ${booking.status}`}>
-                          {booking.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
+      <BookingTable bookings={bookings} />
+      <EditCurrentUser
+        open={openEditUser}
+        setOpen={setOpenEditUser}
+        user={user}
+      />
     </section>
   );
 };

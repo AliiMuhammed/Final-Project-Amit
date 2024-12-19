@@ -33,10 +33,19 @@ const BookingTable = ({ headers, data }) => {
   };
 
   // Memoize paginated data to avoid recalculating on every render
-  const paginatedData = useMemo(
-    () => data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [data, page, rowsPerPage]
-  );
+  const paginatedData = useMemo(() => {
+    const sortedData = [...data].sort((a, b) => {
+      if (a.status === "In-progress" && b.status !== "In-progress") {
+        return -1;
+      }
+      if (a.status !== "In-progress" && b.status === "In-progress") {
+        return 1;
+      }
+      return 0;
+    });
+    return sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [data, page, rowsPerPage]);
+  
 
   const convertToReadableDate = (isoDate) => {
     const dateObj = new Date(isoDate);
@@ -153,7 +162,7 @@ const BookingTable = ({ headers, data }) => {
                     </div>
                   </TableCell>
                 ) : (
-                  <TableCell></TableCell>
+                  <TableCell>No Action Required</TableCell>
                 )}
               </TableRow>
             ))}

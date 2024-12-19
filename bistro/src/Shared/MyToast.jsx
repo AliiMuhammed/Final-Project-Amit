@@ -19,6 +19,7 @@ const MyToast = () => {
       onClose={handleClose}
       sx={{ width: "30%" }}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      className="my-toast"
     >
       <Alert
         onClose={handleClose}

@@ -60,6 +60,7 @@ body {
   }
 }
 
+
 /* Large screens (992px and up) */
 @media only screen and (min-width: 992px) {
   .container {
@@ -149,4 +150,12 @@ a {
 
 section {
   padding: 5rem 0;
+}
+
+@media only screen and (max-width: 991px) {
+  .my-toast {
+    width: 85% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 }
