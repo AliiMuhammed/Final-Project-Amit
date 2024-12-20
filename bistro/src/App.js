@@ -5,16 +5,18 @@ import Backdrop from "./Shared/Backdrop";
 import NavBar from "./Shared/NavBar";
 import Footer from "./Shared/Footer";
 import MyToast from "./Shared/MyToast";
+import ScrollToTop from "./Shared/ScrollToTop";
 
 function App() {
   return (
     <>
       <Suspense fallback={<Backdrop />}>
-        <NavBar/>
+        <NavBar />
         <Outlet />
-        <Footer/>
-        <MyToast/>
+        <Footer />
+        <MyToast />
       </Suspense>
+      <ScrollToTop />
       <MoveToTop />
     </>
   );

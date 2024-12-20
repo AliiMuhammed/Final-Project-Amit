@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -70,7 +70,8 @@ const UpdatePass = ({ open, setOpen }) => {
       })
       .catch((error) => {
         setLoading(false);
-        const errorMsg = error.response?.data?.message || MESSAGES.updatePassFail;
+        const errorMsg =
+          error.response?.data?.message || MESSAGES.updatePassFail;
         setErr(errorMsg);
 
         if (process.env.NODE_ENV === "development") {
