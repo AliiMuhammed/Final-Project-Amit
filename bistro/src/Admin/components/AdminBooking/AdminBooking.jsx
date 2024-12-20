@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Spinner from "../../../Shared/Spinner";
 import CustomAlert from "../../../Shared/CustomAlert";
 import http from "../../../Helper/http";
+import "./style/adminBooking.css";
 const AdminBooking = () => {
   const refreshCount = useSelector((state) => state.refresh);
   const [booking, setBooking] = useState({
@@ -36,19 +37,24 @@ const AdminBooking = () => {
           <CustomAlert msg={"No Bookings found"} type={"info"} />
         )}
         {booking.data.length > 0 && (
-          <BookingTable
-            data={booking.data}
-            headers={[
-              "Image",
-              "Name",
-              "Phone",
-              "No. of People",
-              "Date",
-              "Time",
-              "Status",
-              "Actions",
-            ]}
-          />
+          <>
+            <div className="table-header">
+              <h2>Bookings List</h2>
+            </div>
+            <BookingTable
+              data={booking.data}
+              headers={[
+                "Image",
+                "Name",
+                "Phone",
+                "No. of People",
+                "Date",
+                "Time",
+                "Status",
+                "Actions",
+              ]}
+            />
+          </>
         )}
       </div>
     </section>

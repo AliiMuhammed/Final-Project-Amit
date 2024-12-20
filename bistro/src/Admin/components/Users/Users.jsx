@@ -32,6 +32,9 @@ const Users = () => {
   return (
     <section className="users-section">
       <div className="container">
+        <div className="table-header">
+          <h2>Users List</h2>
+        </div>
         {users.data.length === 0 && !users.loading && (
           <CustomAlert msg={"No users found"} type={"info"} />
         )}
