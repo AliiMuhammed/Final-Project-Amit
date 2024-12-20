@@ -11,10 +11,10 @@ const Hero = () => {
           welcoming, culinary haven.
         </p>
         <div className="hero-btns">
-          <Link to={"/"} className="main-btn">
+          <Link to={"/booking"} className="main-btn">
             Book A Table
           </Link>
-          <Link to={"/"} className="main-outline-btn">
+          <Link to={"/menu"} className="main-outline-btn">
             Explore Menu
           </Link>
         </div>

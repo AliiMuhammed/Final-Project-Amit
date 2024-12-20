@@ -50,10 +50,10 @@ export const routes = createBrowserRouter([
         path: "/menu",
         element: <Menu />,
       },
-      // {
-      //   path: "/contact",
-      //   element: <ContactUs />,
-      // },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
       {
         path: "/booking",
         element: <Booking />,
@@ -78,7 +78,7 @@ export const routes = createBrowserRouter([
         element: <Admin />,
         children: [
           {
-            path: "", // this matches the /admin route exactly
+            path: "",
             element: <Navigate to="/admin/home" replace />,
           },
 
