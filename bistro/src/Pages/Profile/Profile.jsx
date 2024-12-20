@@ -8,6 +8,11 @@ import { useDispatch } from "react-redux";
 import { openToast } from "../../Redux/Slices/toastSlice";
 import EditCurrentUser from "./components/EditCurrentUser";
 import BookingTable from "./components/BookingTable";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Tooltip from "@mui/material/Tooltip";
+import UpdatePass from "./components/UpdatePass";
+
 const Profile = () => {
   const dispatch = useDispatch();
   const user = getAuthUser();
@@ -17,6 +22,15 @@ const Profile = () => {
     errMsg: "",
   });
   const [openEditUser, setOpenEditUser] = useState(false);
+  const [openEditPass, setOpenEditPass] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleEditImage = () => {
     const inputElement = document.createElement("input");
     inputElement.type = "file";
@@ -83,6 +97,11 @@ const Profile = () => {
 
   const handleEditClick = () => {
     setOpenEditUser(true);
+    handleClose();
+  };
+  const handleEditPassClick = () => {
+    setOpenEditPass(true);
+    handleClose();
   };
 
   return (
@@ -106,12 +125,11 @@ const Profile = () => {
               <h1 className="user-name">
                 {user.firstName} {user.lastName}
               </h1>
-              <button
-                onClick={() => handleEditClick(user)}
-                className="edit-profile"
-              >
-                <FaEdit />
-              </button>
+              <Tooltip title="Edit">
+                <button onClick={handleClick} className="edit-profile">
+                  <FaEdit />
+                </button>
+              </Tooltip>
             </div>
             <p className="user-email">
               <span>Email</span>
@@ -133,6 +151,26 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem onClick={handleEditClick}>Edit Profile</MenuItem>
+        <MenuItem onClick={handleEditPassClick}>Change Password</MenuItem>
+      </Menu>
       <MainHeader header={"My Bookings"} />
       <BookingTable bookings={bookings} />
       <EditCurrentUser
@@ -140,6 +178,7 @@ const Profile = () => {
         setOpen={setOpenEditUser}
         user={user}
       />
+      <UpdatePass open={openEditPass} setOpen={setOpenEditPass} />
     </section>
   );
 };
