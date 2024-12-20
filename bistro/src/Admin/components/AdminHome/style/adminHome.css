@@ -1,0 +1,136 @@
+.admin-home .container .admin-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.admin-home .container .admin-header .main-title {
+    margin-bottom: 0rem;
+}
+
+.admin-home .container .site-cards {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.admin-home .container .site-cards .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    cursor: pointer;
+    background-color: var(--thirdFontColor);
+    height: 15rem;
+    color: var(--mainFontColor);
+}
+
+.admin-home .container .site-cards .card:hover {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondaryFontColor);
+    color: var(--main-white);
+}
+
+.admin-home .container .site-cards .card h1 {
+    margin-bottom: .5rem;
+    font-size: 1.8rem;
+}
+
+.admin-home .container .site-cards .card p {
+    margin-bottom: .5rem;
+    font-size: 1.3rem;
+}
+
+.admin-home .container .site-cards .card a {
+    color: var(--mainColor);
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+}
+
+.admin-home .container .site-cards .card:hover a {
+    text-decoration: underline;
+}
+
+.admin-home .container .site-cards .card .right-card {
+    position: relative;
+    color: var(--mainColor)
+}
+
+.admin-home .container .site-cards .card .right-card svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -50%);
+    font-size: 10rem;
+    color: var(--mainColor);
+    -webkit-transform: translate(-100%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    -ms-transform: translate(-100%, -50%);
+    -o-transform: translate(-100%, -50%);
+    opacity: .1;
+}
+
+.admin-home .container .charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 4rem;
+}
+
+.admin-home .container .charts .chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.admin-home .container .charts .chart h1 {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    color: var(--mainFontColor);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.admin-home .container .charts .chart .gauge-chart {
+    width: 15rem;
+    height: 15rem;
+    transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -o-transition: var(--main-transition);
+    cursor: pointer;
+    margin-bottom: -2rem;
+    color: var(--mainFontColor);
+}
+
+.css-b9rdri-MuiGauge-referenceArc {
+    fill: var(--mainColor) !important;
+}
