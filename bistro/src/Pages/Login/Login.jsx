@@ -58,8 +58,14 @@ const Login = () => {
           setUserToken(res.token);
         })
         .catch((err) => {
+          console.log();
           setLoading(false);
-          dispatch(openToast({ msg: "Something went wrong", type: "error" }));
+          dispatch(
+            openToast({
+              msg: err ? err.response.data.message : "Something went wrong",
+              type: "error",
+            })
+          );
         });
     }
   };
@@ -111,7 +117,7 @@ const Login = () => {
               )}
             </div>
             <div className="login-links">
-              <Link to={"/forgot-password"}>forget password</Link>
+              <Link to={"/forgot_password"}>forget password</Link>
               <div className="regester">
                 Don't have an account?
                 <Link to={"/register"}>Sign Up</Link>

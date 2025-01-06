@@ -17,7 +17,9 @@ import AdminBooking from "./Admin/components/AdminBooking/AdminBooking";
 import Guest from "./Middleware/Guest";
 import GuestProfile from "./Middleware/GuestProfile";
 import AdminMiddleware from "./Middleware/AdminMiddleware";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
+import ForgetPass from "./Pages/Forget Password/ForgetPass";
+import ResetPass from "./Pages/Forget Password/components/ResetPass";
 
 export const routes = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const routes = createBrowserRouter([
           {
             path: "/register",
             element: <Register />,
+          },
+          {
+            path: "/forgot_password",
+            element: <ForgetPass />,
+          },
+          {
+            path: "/resetPassword/:token",
+            element: <ResetPass />,
           },
         ],
       },
