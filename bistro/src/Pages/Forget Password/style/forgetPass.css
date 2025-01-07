@@ -94,3 +94,22 @@
     -ms-transition: var(--main-transition);
     -o-transition: var(--main-transition);
 }
+@media only screen and (max-width: 991px) {
+    .forgetPass-section .container .forget-form {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .forgetPass-section .container .forget-form .input-field input {
+        padding: 0.9rem 1.5rem;
+    }
+
+    .forgetPass-section .container .forget-form form {
+        gap: 1rem;
+    }
+    .forgetPass-section .container .forget-form .form-header h2 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+}
