@@ -18,6 +18,6 @@
 </span>
 
 
-<img src="https://github.com/user-attachments/assets/460d659d-dac5-470a-93ea-180e70f8934a" alt="Mobile GIF" width="80%">
+<img src="https://github.com/user-attachments/assets/460d659d-dac5-470a-93ea-180e70f8934a" alt="Mobile GIF" width="100%">
 
 
