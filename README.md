@@ -1,5 +1,4 @@
-
-![logo](https://github.com/user-attachments/assets/f835ddd5-76c7-47ab-a5e7-680551b5cfb1)
+<img src="https://github.com/user-attachments/assets/f835ddd5-76c7-47ab-a5e7-680551b5cfb1" alt="Logo" width="80%">
 ###
 
 #### Bistro Bliss is a user-friendly web app designed for restaurant lovers. It lets you explore the restaurant’s menu, book a table easily, and create an account to keep track of your bookings. Bistro Bliss makes dining out simple and stress-free!
@@ -67,12 +66,12 @@
 - __Desktop View__
 
 <span>
-  <img src="https://github.com/user-attachments/assets/59e917b2-9634-460b-8678-999c806d028d" alt="Mobile Screenshot" width="45%">
-  <img src="https://github.com/user-attachments/assets/2190fa20-7d11-4dfa-8234-5582c1125904" alt="Mobile GIF" width="45%">
+  <img src="https://github.com/user-attachments/assets/59e917b2-9634-460b-8678-999c806d028d" alt="Mobile Screenshot" width="60%">
+  <img src="https://github.com/user-attachments/assets/2190fa20-7d11-4dfa-8234-5582c1125904" alt="Mobile GIF" width="60%">
 </span>
 
 
-<img src="https://github.com/user-attachments/assets/460d659d-dac5-470a-93ea-180e70f8934a" alt="Mobile GIF" width="100%">
+<img src="https://github.com/user-attachments/assets/460d659d-dac5-470a-93ea-180e70f8934a" alt="Mobile GIF" width="80%">
 
 
 
