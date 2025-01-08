@@ -61,7 +61,7 @@ const UsersTable = ({ data, headers }) => {
                   <div className="table-img">
                     <img
                       alt={`${user.firstName} ${user.lastName}`}
-                      src={user.fileUrl}
+                      src={user?.fileUrl}
                       loading="lazy"
                       crossOrigin="anonymous"
                       className="img-placeholder"

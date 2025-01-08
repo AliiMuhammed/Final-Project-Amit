@@ -61,7 +61,7 @@ const MenuTable = ({ headers, data }) => {
                   <div className="table-img">
                     <img
                       alt={item.name}
-                      src={item.fileUrl}
+                      src={item?.fileUrl}
                       loading="lazy"
                       crossOrigin="anonymous"
                       className="img-placeholder"

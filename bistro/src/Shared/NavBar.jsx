@@ -102,7 +102,7 @@ const NavBar = () => {
                       className="user-profile"
                       onClick={closeNav}
                     >
-                      <img crossOrigin="anonymous" src={user?.fileUrl} alt="" />
+                      <img crossOrigin="anonymous" src={user?.fileUrl} alt="user profile img" />
                     </Link>
                     <button
                       onClick={() => {
@@ -143,7 +143,7 @@ const NavBar = () => {
                   className="user-profile"
                   onClick={closeNav}
                 >
-                  <img crossOrigin="anonymous" src={user?.fileUrl} alt="" />
+                  <img crossOrigin="anonymous" src={user?.fileUrl} alt="user profile img" />
                 </Link>
                 <button
                   onClick={() => {

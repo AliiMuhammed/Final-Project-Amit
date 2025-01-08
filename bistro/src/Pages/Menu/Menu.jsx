@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./style/menu.css";
 import http from "./../../Helper/http";
@@ -112,7 +113,7 @@ const Menu = () => {
                   <div className="menu-item" key={item._id}>
                     <div className="menu-item-img">
                       <img
-                        src={item.fileUrl}
+                        src={item?.fileUrl}
                         crossOrigin="anonymous"
                         alt="menu-img"
                         loading="lazy"

@@ -119,7 +119,7 @@ const BookingTable = ({ headers, data }) => {
                   <div className="table-img">
                     <img
                       alt={item.name}
-                      src={item.user.fileUrl}
+                      src={item.user?.fileUrl}
                       loading="lazy"
                       crossOrigin="anonymous"
                       className="img-placeholder"
