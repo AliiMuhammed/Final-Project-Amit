@@ -48,8 +48,8 @@ const AdminBooking = () => {
                 "Name",
                 "Phone",
                 "No. of People",
-                "Date",
-                "Time",
+                "ًWas booked in",
+                "Booked date",
                 "Status",
                 "Actions",
               ]}

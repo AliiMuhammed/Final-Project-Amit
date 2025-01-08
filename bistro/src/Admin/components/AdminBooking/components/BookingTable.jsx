@@ -24,7 +24,7 @@ const BookingTable = ({ headers, data }) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loadingRows, setLoadingRows] = useState({}); // Track loading for each row and button
   const dispatch = useDispatch();
-
+  console.log(data);
   const handleChangePage = (_, newPage) => setPage(newPage);
 
   const handleChangeRowsPerPage = (event) => {
@@ -43,9 +43,11 @@ const BookingTable = ({ headers, data }) => {
       }
       return 0;
     });
-    return sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    return sortedData.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
   }, [data, page, rowsPerPage]);
-  
 
   const convertToReadableDate = (isoDate) => {
     const dateObj = new Date(isoDate);
@@ -54,25 +56,34 @@ const BookingTable = ({ headers, data }) => {
       return "Invalid Date";
     }
 
-    return dateObj.toLocaleDateString('en-GB');  
+    return dateObj.toLocaleDateString("en-GB");
   };
 
   const handleReject = (id) => {
-    setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], rejectLoading: true } }));
+    setLoadingRows((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], rejectLoading: true },
+    }));
 
     http
       .PATCH(`bookings/${id}`, {
         status: "rejected",
       })
       .then((res) => {
-        setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], rejectLoading: false } }));
+        setLoadingRows((prev) => ({
+          ...prev,
+          [id]: { ...prev[id], rejectLoading: false },
+        }));
         dispatch(triggerRefresh());
         dispatch(
           openToast({ msg: "Booking Rejected successfully", type: "success" })
         );
       })
       .catch((err) => {
-        setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], rejectLoading: false } }));
+        setLoadingRows((prev) => ({
+          ...prev,
+          [id]: { ...prev[id], rejectLoading: false },
+        }));
         dispatch(
           openToast({ msg: "Failed to Reject this booking", type: "error" })
         );
@@ -80,21 +91,30 @@ const BookingTable = ({ headers, data }) => {
   };
 
   const handleApprove = (id) => {
-    setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], acceptLoading: true } }));
+    setLoadingRows((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], acceptLoading: true },
+    }));
 
     http
       .PATCH(`bookings/${id}`, {
         status: "accepted",
       })
       .then((res) => {
-        setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], acceptLoading: false } }));
+        setLoadingRows((prev) => ({
+          ...prev,
+          [id]: { ...prev[id], acceptLoading: false },
+        }));
         dispatch(triggerRefresh());
         dispatch(
           openToast({ msg: "Booking Approved successfully", type: "success" })
         );
       })
       .catch((err) => {
-        setLoadingRows((prev) => ({ ...prev, [id]: { ...prev[id], acceptLoading: false } }));
+        setLoadingRows((prev) => ({
+          ...prev,
+          [id]: { ...prev[id], acceptLoading: false },
+        }));
         dispatch(
           openToast({ msg: "Failed to Approve this booking", type: "error" })
         );
@@ -129,8 +149,10 @@ const BookingTable = ({ headers, data }) => {
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.phone}</TableCell>
                 <TableCell>{item.numOfPersons}</TableCell>
-                <TableCell>{convertToReadableDate(item.date)}</TableCell>
-                <TableCell>{item.time}</TableCell>
+                <TableCell>{convertToReadableDate(item.createdAt)}</TableCell>
+                <TableCell>{`${convertToReadableDate(item.date)} ${
+                  item.time
+                }`}</TableCell>
                 <TableCell>
                   <span className={item.status}>{item.status}</span>
                 </TableCell>
