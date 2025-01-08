@@ -1,5 +1,4 @@
-<img src="https://github.com/user-attachments/assets/f835ddd5-76c7-47ab-a5e7-680551b5cfb1" alt="Logo" width="80%">
-###
+<img src="https://github.com/user-attachments/assets/f835ddd5-76c7-47ab-a5e7-680551b5cfb1" alt="Logo" width="60%">
 
 #### Bistro Bliss is a user-friendly web app designed for restaurant lovers. It lets you explore the restaurant’s menu, book a table easily, and create an account to keep track of your bookings. Bistro Bliss makes dining out simple and stress-free!
 
