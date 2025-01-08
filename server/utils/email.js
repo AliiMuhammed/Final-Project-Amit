@@ -10,7 +10,7 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.firstName;
     this.url = url;
-    this.from = `Bistro Bliss <bistro.bliss.restaurants@gmail.com>`; // Updated from email
+    this.from = `Bistro Bliss <bistro.bliss.restaurants@gmail.com>`;
   }
 
   newTransport() {
@@ -28,9 +28,7 @@ module.exports = class Email {
     });
   }
 
-  // Send the actual email
   async send(template, subject) {
-    // 1) Render HTML based on a pug template
     const html = pug.renderFile(
       path.join(__dirname, `../views/emails/${template}.pug`),
       {
@@ -40,7 +38,6 @@ module.exports = class Email {
       }
     );
 
-    // 2) Define email options
     const mailOptions = {
       from: this.from,
       to: this.to,
@@ -49,7 +46,6 @@ module.exports = class Email {
       text: htmlToText(html),
     };
 
-    // 3) Create a transport and send email
     await this.newTransport().sendMail(mailOptions);
   }
 

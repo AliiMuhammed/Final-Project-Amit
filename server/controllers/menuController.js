@@ -1,3 +1,22 @@
+/**
+ * This file defines controllers for managing menu items, including photo uploads and CRUD operations.
+ *
+ * Key functionalities:
+ * 1. Handles file uploads and image processing:
+ *    - Uses `multer` for handling photo uploads (`uploadItemPhotos`).
+ *    - Processes images with `sharp` to resize and optimize them (`resizeItemPhotos`).
+ * 2. Provides reusable CRUD operations for menu items:
+ *    - Create a menu item (`createItem`).
+ *    - Retrieve all menu items (`getAllItems`).
+ *    - Retrieve a single menu item by ID (`getItem`).
+ *    - Update a menu item (`updateItem`).
+ *    - Delete a menu item (`deleteItem`).
+ * 3. Includes middleware for filtering and validating uploaded files (e.g., ensuring only images are uploaded).
+ * 4. Promotes modularity and reusability by leveraging a factory pattern for generic CRUD operations.
+ * 5. Ensures consistent error handling with `catchAsync` and `AppError`.
+ *
+ * This module is designed for managing menus in an application with optimized image handling.
+ */
 const Menu = require("../models/menuModel");
 const catchAsync = require("../utils/catchAsync");
 const multer = require("multer");

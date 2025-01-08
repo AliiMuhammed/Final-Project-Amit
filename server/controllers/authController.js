@@ -1,3 +1,20 @@
+/**
+ * This file contains the authentication and user-related middleware functions
+ * for handling user signup, login, and profile updates in the application.
+ *
+ * Key Features:
+ * - Handles file uploads for user photos using multer.
+ * - Provides utilities for resizing and saving uploaded images with sharp.
+ * - Manages user authentication, including signup, login, password reset, and updates.
+ * - Implements JWT-based authentication to protect routes and verify user roles.
+ * - Supports role-based access control for authorized actions.
+ * - Includes error handling and token management for secure communication.
+ *
+ * Dependencies:
+ * - bcrypt, jwt, multer, sharp for file handling and security.
+ * - User model for interacting with the database.
+ * - Email utility for sending emails like password reset.
+ */
 const { promisify } = require("util");
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
@@ -5,7 +22,6 @@ const jwt = require("jsonwebtoken");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
 const crypto = require("crypto");
-const cloudinary = require("../utils/cloudinary");
 const multer = require("multer");
 const sharp = require("sharp");
 const multerStorage = multer.memoryStorage();
@@ -36,7 +52,7 @@ const createSendToken = (user, statusCode, req, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true, // this means cookies can not be access or modified in any way by the browser
+    httpOnly: true, 
     secure: req.secure || req.headers["x-forwarded-porto"] === "https",
   });
 

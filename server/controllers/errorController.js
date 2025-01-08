@@ -1,3 +1,18 @@
+/**
+ * This file defines a centralized error handling mechanism for the application.
+ * It includes utility functions to handle various types of errors that may occur
+ * during runtime and ensures consistent error responses for both development and production environments.
+ *
+ * Key functionalities:
+ * 1. Handles database-specific errors like casting errors, duplicate fields, and validation errors.
+ * 2. Handles authentication errors such as invalid or expired JWT tokens.
+ * 3. Differentiates error responses for development and production modes:
+ *    - Development: Provides detailed error information for debugging.
+ *    - Production: Returns user-friendly messages for operational errors.
+ * 4. Supports additional password-related validation errors.
+ *
+ * The module exports a middleware function to handle errors globally in the application.
+ */
 const AppError = require("./../utils/appError");
 
 const handleCastErrorDB = (err) => {
@@ -44,19 +59,15 @@ const sendErrorDev = (err, res) => {
 };
 
 const sendErrorProd = (err, res) => {
-  // Operational, trusted error: send message to client
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
     });
 
-    // Programming or other unknown error: don't leak error details
   } else {
-    // 1) Log error
     console.error("ERROR 💥", err);
 
-    // 2) Send generic message
     res.status(500).json({
       status: "error",
       message: "Something went very wrong!",

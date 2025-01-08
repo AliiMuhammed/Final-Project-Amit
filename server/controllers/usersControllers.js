@@ -1,3 +1,25 @@
+/**
+ * This file defines controllers for managing user-related operations, including:
+ *
+ * Key functionalities:
+ * 1. Handles file uploads and image processing:
+ *    - Uses `multer` to handle photo uploads (`uploadUserPhoto`).
+ *    - Processes images with `sharp` to resize and optimize them (`resizeUserPhoto`).
+ * 2. Provides reusable CRUD operations for users:
+ *    - Update user profile information (`updateMe`).
+ *    - Retrieve the currently logged-in user (`getMe`).
+ *    - Change user status (`changeStatus`).
+ *    - Retrieve all users (`getAllUsers`).
+ *    - Retrieve a single user by ID (`getUser`).
+ *    - Update a user (`updateUser`).
+ *    - Delete a user (`deleteUser`).
+ * 3. Ensures modularity and reusability through the factory pattern for generic operations.
+ * 4. Promotes data filtering by restricting fields that can be updated (`filterObj`).
+ * 5. Implements consistent error handling with `catchAsync` and `AppError`.
+ * 6. Safeguards sensitive operations, such as ensuring password updates are handled separately.
+ *
+ * This module is designed to manage user-related data and operations in an application.
+ */
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");

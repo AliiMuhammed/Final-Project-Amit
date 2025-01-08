@@ -1,11 +1,25 @@
+/**
+ * This file defines reusable CRUD (Create, Read, Update, Delete) and status management controllers
+ * for working with MongoDB models in a Node.js application.
+ *
+ * Key functionalities:
+ * 1. Provides generic implementations for:
+ *    - Creating a document (`createOne`).
+ *    - Retrieving a single document (`getOne`) or all documents (`getAll`).
+ *    - Updating a document (`updateOne`).
+ *    - Deleting a document (`deleteOne`), with optional file cleanup for associated files.
+ * 2. Supports advanced querying, sorting, filtering, and pagination using `APIFeatures`.
+ * 3. Includes functionality to toggle the `active` status of a document (`changeStatus`).
+ * 4. Utilizes `catchAsync` for async error handling and `AppError` for operational error management.
+ * 5. Handles file deletion during updates or deletions to maintain storage cleanliness.
+ *
+ * This module promotes code reusability and modularity for controllers across the application.
+ */
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const APIFeatures = require("./../utils/apiFeatures");
-const cloudinary = require("../utils/cloudinary");
 const fs = require("fs");
-const Bookings = require("../models/bookingModel");
 
-// const Email = require("../utils/email");
 
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -15,7 +29,6 @@ exports.deleteOne = (Model) =>
       return next(new AppError("No Document found with that ID", 404));
     }
 
-    // Check if model.file is an array
     if (model.file && model.file !== "default.jpg") {
       const oldFilePath = `upload/${model.file}`;
       fs.unlink(oldFilePath, (err) => {
@@ -40,9 +53,7 @@ exports.updateOne = (Model) =>
     if (!model) {
       return next(new AppError("No Document found with that ID", 404));
     }
-    // console.log(req.file);
-    // console.log(model);
-    if (model.file && model.file !== "default.jpg") {
+       if (model.file && model.file !== "default.jpg") {
       const oldFilePath = `upload/${model.file}`;
       fs.unlink(oldFilePath, (err) => {
         if (err) {
@@ -81,7 +92,6 @@ exports.getOne = (Model, popOptions) =>
     let query = Model.findById(req.params.id);
     if (popOptions) query.populate(popOptions);
     const doc = await query;
-    // Course.findOne({ _id: req.params.id })
 
     if (!doc) {
       return next(new AppError("No document found with that ID", 404));
@@ -97,7 +107,6 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    //To allow for nested GET Materials on course
     let filter = {};
     let docs;
     const features = new APIFeatures(Model.find(filter), req.query)
@@ -114,13 +123,6 @@ exports.getAll = (Model) =>
       totalPages = 0;
       docs = 0;
     }
-    // if (Model == Bookings) {
-    //   documents = documents.map((booking) => {
-    //     booking.updateStatus();
-    //     return booking;
-    //   });
-    // }
-    // SEND RESPONSE
     res.status(200).json({
       status: "success",
       totalDocs: docs.length,
