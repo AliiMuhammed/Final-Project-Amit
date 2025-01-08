@@ -8,8 +8,10 @@ import { FaUsers } from "react-icons/fa";
 import http from "../../../Helper/http";
 import Spinner from "../../../Shared/Spinner";
 import { Gauge } from "@mui/x-charts/Gauge";
+import { getAuthUser } from "../../../Helper/Storage";
 
 const AdminHome = () => {
+  const user = getAuthUser();
   const [bookings, setBookings] = useState({
     loading: false,
     data: [],
@@ -66,12 +68,12 @@ const AdminHome = () => {
         });
       });
   }, []);
-
+  
   return (
     <section className="admin-home">
       <div className="container">
         <div className="admin-header">
-          <MainHeader header={"Admin Home"} />
+          <MainHeader header={`Welcome ${user.firstName}`} />
           <p>
             You can manage your restaurant's menu, bookings, and other data
             here.

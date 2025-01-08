@@ -6,6 +6,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import { FaUsers, FaBook, FaHome } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
+import { TbLayoutDashboardFilled } from "react-icons/tb";
 
 const Dashboard = ({ toggleSidebarClass }) => {
   const [sideBar, setSideBar] = useState(true);
@@ -33,12 +34,12 @@ const Dashboard = ({ toggleSidebarClass }) => {
       </div>
       <div className="side-bar-body">
         <ul className="links">
-          <li className="link">
+        <li className="link">
             <NavLink to={"/admin/home"}>
               <div className="icon">
-                <FaHome />
+                <TbLayoutDashboardFilled />
               </div>
-              <span>Home</span>
+              <span>Dashboard</span>
             </NavLink>
           </li>
           <li className="link">
@@ -63,6 +64,14 @@ const Dashboard = ({ toggleSidebarClass }) => {
                 <FaBook />
               </div>
               <span>Booking</span>
+            </NavLink>
+          </li>
+          <li className="link">
+            <NavLink to={"/"}>
+              <div className="icon">
+                <FaHome />
+              </div>
+              <span>Home</span>
             </NavLink>
           </li>
         </ul>
