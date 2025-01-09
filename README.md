@@ -65,8 +65,8 @@
 - __Desktop View__
 
 <span>
-  <img src="https://github.com/user-attachments/assets/59e917b2-9634-460b-8678-999c806d028d" alt="Mobile Screenshot" width="80%">
-  <img src="https://github.com/user-attachments/assets/2190fa20-7d11-4dfa-8234-5582c1125904" alt="Mobile GIF" width="80%">
+  <img src="https://github.com/user-attachments/assets/59e917b2-9634-460b-8678-999c806d028d" alt="Mobile Screenshot" width="100%">
+  <img src="https://github.com/user-attachments/assets/2190fa20-7d11-4dfa-8234-5582c1125904" alt="Mobile GIF" width="100%">
 </span>
 
 
