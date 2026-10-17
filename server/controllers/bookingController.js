@@ -1,39 +1,26 @@
-/**
- * This file manages the business logic for handling booking operations.
- * It provides controllers for creating, retrieving, and updating bookings.
- *
- * Key functionalities:
- * 1. Automatically sets the user ID in the booking request (`setIDs`).
- * 2. Utilizes a reusable factory function to create and fetch bookings (`createBooking`, `getBookings`).
- * 3. Allows changing the booking status (e.g., "Confirmed" or "Declined") based on input (`changeStatus`).
- *
- * The module leverages utility functions like `catchAsync` for error handling and ensures code reusability with `handlerFactory`.
- */
 const Bookings = require("../models/bookingModel");
 const factory = require("./handlerFactory");
 const catchAsync = require("../utils/catchAsync");
-
+const AppError = require("../utils/appError");
 exports.setIDs = (req, res, next) => {
-  req.body.user = req.user.id;
+  const { name, phone, numOfPersons, time, date } = req.body;
+  req.body = { user: req.user.id, name, phone, numOfPersons, time, date };
   next();
 };
-
 exports.createBooking = factory.createOne(Bookings);
-
-exports.getBookings = factory.getAll(Bookings);
-
+exports.getBookings = (req, res, next) => {
+  if (req.user.role !== "admin") req.resourceFilter = { user: req.user.id };
+  return factory.getAll(Bookings)(req, res, next);
+};
 exports.changeStatus = catchAsync(async (req, res, next) => {
-  if (req.body.status === "accepted") {
-    await Bookings.findByIdAndUpdate(req.params.bookingID, {
-      status: "Confirmed",
-    });
-  } else {
-    await Bookings.findByIdAndUpdate(req.params.bookingID, {
-      status: "Declined",
-    });
-  }
-
-  res.status(201).json({
-    status: "success",
-  });
+  const statuses = { accepted: "Confirmed", rejected: "Declined" };
+  if (!Object.hasOwn(statuses, req.body.status))
+    return next(new AppError("Status must be accepted or rejected.", 400));
+  const booking = await Bookings.findByIdAndUpdate(
+    req.params.bookingID,
+    { status: statuses[req.body.status] },
+    { runValidators: true },
+  );
+  if (!booking) return next(new AppError("Booking not found.", 404));
+  res.status(201).json({ status: "success" });
 });

@@ -22,39 +22,14 @@ const jwt = require("jsonwebtoken");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
 const crypto = require("crypto");
-const multer = require("multer");
-const sharp = require("sharp");
-const multerStorage = multer.memoryStorage();
-
-const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    cb(new AppError("Not an image! Please upload only images.", 400), false);
-  }
-};
-
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
-
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   });
 };
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-
-  res.cookie("jwt", token, {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true, 
-    secure: req.secure || req.headers["x-forwarded-porto"] === "https",
-  });
 
   user.password = undefined;
 
@@ -67,22 +42,9 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
-exports.uploadUserPhoto = upload.single("photo");
-
-exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-  if (!req.file) return next();
-
-  req.file.filename = `Course-${Date.now()}.jpeg`;
-
-  await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 });
-  next();
-});
-
 exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body);
+  const { firstName, lastName, email, phone, password, passwordConfirm } = req.body;
+  const newUser = await User.create({ firstName, lastName, email, phone, password, passwordConfirm });
   // let url;
   // await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, req, res);
@@ -104,7 +66,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (user.active == false) {
     return res.status(401).json({
       status: "fail",
-      message: "Your email not verified yet",
+      message: "This account is disabled.",
     });
   }
   user.rememberMe = rememberMe;
@@ -117,7 +79,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
+    req.headers.authorization.startsWith("Bearer ")
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
@@ -132,7 +94,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 3) Check if the user still exists
   const currentUser = await User.findById(decoded.id);
-  if (!currentUser) {
+  if (!currentUser || currentUser.active === false) {
     return next(
       new AppError("The user belongs to this token dose no longer exist.", 401)
     );
@@ -175,8 +137,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   //3) Send it to users email
 
   try {
-    const resetURL = `
-    http://localhost:3000/resetPassword/${resetToken}`;
+    const resetURL = `${require("../config/environment").validateEnvironment().frontendUrl}/resetPassword/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
     return res.status(200).json({
@@ -187,7 +148,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-    console.log(error);
+    console.error("Password reset email delivery failed.");
     return next(
       new AppError("There was an error sending an email. Try again later!", 500)
     );

@@ -12,6 +12,8 @@ import Spinner from "../../../Shared/Spinner";
 import CustomAlert from "../../../Shared/CustomAlert";
 import { MESSAGES } from "./messages";
 
+import { setUserToken, setAuthUser } from "../../../Helper/Storage";
+
 const UpdatePass = ({ open, setOpen }) => {
   const dispatch = useDispatch();
 
@@ -58,6 +60,8 @@ const UpdatePass = ({ open, setOpen }) => {
     http
       .PATCH("users/updatePassword", formData)
       .then((response) => {
+        setUserToken(response.token);
+        setAuthUser(response.data.user);
         setLoading(false);
         dispatch(triggerRefresh());
         dispatch(

@@ -46,7 +46,7 @@ const menuSchema = new mongoose.Schema(
 );
 
 menuSchema.virtual("fileUrl").get(function () {
-  return `http://localhost:4000/${this.file}`;
+  return require("../utils/media").fileUrl(this.file);
 });
 
 const Menu = mongoose.model("Menu", menuSchema);

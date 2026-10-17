@@ -28,44 +28,44 @@ const AdminHome = () => {
     errMsg: "",
   });
   useEffect(() => {
-    setBookings({ ...bookings, loading: true });
-    setUsers({ ...users, loading: true });
-    setMenu({ ...menu, loading: true });
+    setBookings((previous) => ({ ...previous, loading: true }));
+    setUsers((previous) => ({ ...previous, loading: true }));
+    setMenu((previous) => ({ ...previous, loading: true }));
     http
       .GET("bookings")
       .then((response) => {
-        setBookings({ ...bookings, loading: false, data: response.data.data });
+        setBookings((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setBookings({
-          ...bookings,
+        setBookings((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
     http
       .GET("users")
       .then((response) => {
-        setUsers({ ...users, loading: false, data: response.data.data });
+        setUsers((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setUsers({
-          ...users,
+        setUsers((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
     http
       .GET("menu")
       .then((response) => {
-        setMenu({ ...menu, loading: false, data: response.data.data });
+        setMenu((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setMenu({
-          ...menu,
+        setMenu((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
   }, []);
   

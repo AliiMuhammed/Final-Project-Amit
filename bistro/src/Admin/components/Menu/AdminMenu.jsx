@@ -17,18 +17,18 @@ const AdminMenu = () => {
   });
 
   useEffect(() => {
-    setMenu({ ...menu, loading: true });
+    setMenu((previous) => ({ ...previous, loading: true }));
     http
       .GET("menu")
       .then((response) => {
-        setMenu({ ...menu, loading: false, data: response.data.data });
+        setMenu((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setMenu({
-          ...menu,
+        setMenu((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
   }, [refreshCount]);
 

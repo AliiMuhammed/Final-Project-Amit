@@ -61,9 +61,10 @@ const userSchema = new mongoose.Schema(
         message: "Passwords are not the same!",
       },
     },
+    active: { type: Boolean, default: true },
     passwordChangedAt: Date,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
+    passwordResetToken: { type: String, select: false },
+    passwordResetExpires: { type: Date, select: false },
     rememberMe: {
       type: Boolean,
       default: false,
@@ -78,7 +79,7 @@ const userSchema = new mongoose.Schema(
 
 // Virtual property to return the accessible link
 userSchema.virtual("fileUrl").get(function () {
-  return `http://localhost:4000/${this.file}`;
+  return require("../utils/media").fileUrl(this.file);
 });
 
 userSchema.pre("save", async function (next) {

@@ -1,24 +1,30 @@
 const nodemailer = require("nodemailer");
 const pug = require("pug");
 const { htmlToText } = require("html-to-text");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
 const path = require("path");
+const { validateEnvironment } = require("../config/environment");
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
     this.firstName = user.firstName;
     this.url = url;
-    this.from = `Bistro Bliss <bistro.bliss.restaurants@gmail.com>`;
+    this.from = `Bistro Bliss <${process.env.NODEMAILER_USER}>`;
   }
 
   newTransport() {
+    if (!process.env.NODEMAILER_USER || !process.env.NODEMAILER_PASSWORD) throw new Error("Email delivery is not configured.");
     return nodemailer.createTransport({
       host: "smtp.gmail.com",
       service: "Gmail",
       port: 587,
       secure: false,
+      requireTLS: true,
+      connectionTimeout: 5000,
+      greetingTimeout: 5000,
+      socketTimeout: 10000,
+      disableFileAccess: true,
+      disableUrlAccess: true,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASSWORD,
@@ -35,6 +41,7 @@ module.exports = class Email {
         firstName: this.firstName,
         url: this.url,
         subject,
+        logoUrl: `${validateEnvironment().publicApiUrl}/bistro-logo.png`,
       }
     );
 

@@ -1,0 +1,10 @@
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/config.env
+**/.vercel/
+**/coverage/
+bistro/build/
+server/public/legacy/
+*.log

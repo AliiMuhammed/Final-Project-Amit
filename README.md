@@ -79,31 +79,9 @@
 You can find Bistro Bliss without back-end live at [https://bistro-bliss-template.netlify.app/]
 # Run Locally
 
-#### __Clone the project__
+Use Node 24 and the existing checkout. See [VERCEL_DEPLOYMENT_GUIDE.md](VERCEL_DEPLOYMENT_GUIDE.md) for new Atlas, Cloudinary, environment setup, local commands and the two Vercel projects. No cloud resources are created automatically.
 
-```bash
-  git clone https://github.com/AliiMuhammed/Final-Project-Amit.git
-```
-###### __To run Client side & Server Side__:
+Review [DEPLOYMENT_READINESS_REPORT.md](DEPLOYMENT_READINESS_REPORT.md) for verified checks, external service blockers and remaining dependency findings before authorizing deployment.
 
-- Go to the Clinet directory
-    ```bash
-        cd Final-Project-Amit\bistro
-    ```
-- And for Server directory Go to
-    ```bash
-        cd Final-Project-Amit\server
-    ```
-- Install dependencies
-
-    ```bash
-        npm install
-    ```
-
-- Start Node server
-
-    ```bash
-        npm run start
-    ```
 # Feedback
 If you have any feedback, please reach out to me at ali.muhammed.dev@gmail.com

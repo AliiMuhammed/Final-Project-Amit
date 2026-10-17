@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -27,15 +27,8 @@ const EditUser = ({ open, setOpen, user }) => {
   const [err, setErr] = useState("");
   const [noChangesError, setNoChangesError] = useState(""); // New state for no changes error
 
-  // Set form data when user prop changes
-  useEffect(() => {
-    if (user) {
-      resetForm();
-    }
-  }, [user]);
-
   // Reset form data
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setFormData({
       firstName: user?.firstName || "",
       lastName: user?.lastName || "",
@@ -45,7 +38,11 @@ const EditUser = ({ open, setOpen, user }) => {
     setErrors({});
     setErr("");
     setNoChangesError(""); // Reset the no-changes error
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) resetForm();
+  }, [user, resetForm]);
 
   // Handle input changes
   const handleChange = (e) => {

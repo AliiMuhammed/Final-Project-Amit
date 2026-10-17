@@ -1,13 +1,14 @@
 import React from "react";
 import { HiOutlineLogout } from "react-icons/hi";
 import "./style/adminNav.css";
-import { getAuthUser, removeAuthUser } from "../../../Helper/Storage";
+import { getAuthUser, removeAuthUser, removeUserToken } from "../../../Helper/Storage";
 import { Link, useNavigate } from "react-router-dom";
 const AdminNav = () => {
   const user = getAuthUser();
   const navigate = useNavigate();
   const logout = () => {
     removeAuthUser();
+    removeUserToken();
     navigate("/");
   };
   return (

@@ -11,6 +11,6 @@ router
   .post(bookingController.setIDs, bookingController.createBooking)
   .get(bookingController.getBookings);
 
-router.patch("/:bookingID", bookingController.changeStatus);
+router.patch("/:bookingID", authController.restrictTo("admin"), bookingController.changeStatus);
 
 module.exports = router;

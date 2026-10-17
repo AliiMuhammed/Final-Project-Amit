@@ -11,16 +11,12 @@ export const setUserToken = (data) => {
   localStorage.setItem("user_token", JSON.stringify(data));
 };
 
-export const getAuthUser = (data) => {
-  if (localStorage.getItem("user")) {
-    return JSON.parse(localStorage.getItem("user"));
-  }
+const readStored = (key) => {
+  try { return JSON.parse(localStorage.getItem(key)) || undefined; }
+  catch { localStorage.removeItem(key); return undefined; }
 };
-export const getUserToken = (data) => {
-  if (localStorage.getItem("user_token")) {
-    return JSON.parse(localStorage.getItem("user_token"));
-  }
-};
+export const getAuthUser = () => readStored("user");
+export const getUserToken = () => readStored("user_token");
 
 export const removeAuthUser = () => {
   if (localStorage.getItem("user")) localStorage.removeItem("user");

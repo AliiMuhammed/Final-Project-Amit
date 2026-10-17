@@ -33,7 +33,7 @@ const Menu = () => {
         setMenu({
           ...menu,
           loading: false,
-          errMsg: err.response?.data?.message,
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
         });
       });
   }, []);

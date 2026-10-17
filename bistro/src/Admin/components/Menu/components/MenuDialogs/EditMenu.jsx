@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -28,15 +28,8 @@ const EditMenu = ({ open, setOpen, item }) => {
   const [err, setErr] = useState("");
   const [noChangesError, setNoChangesError] = useState("");
 
-  // Set form data when item prop changes
-  useEffect(() => {
-    if (item) {
-      resetForm();
-    }
-  }, [item]);
-
   // Reset form data
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setFormData({
       name: item?.name || "",
       photo: null, // Reset to null for new upload
@@ -47,7 +40,11 @@ const EditMenu = ({ open, setOpen, item }) => {
     setErrors({});
     setErr("");
     setNoChangesError("");
-  };
+  }, [item]);
+
+  useEffect(() => {
+    if (item) resetForm();
+  }, [item, resetForm]);
 
   // Handle input changes for text fields
   const handleChange = (e) => {
@@ -110,9 +107,6 @@ const EditMenu = ({ open, setOpen, item }) => {
       // Append photo only if a new image has been uploaded
       if (formData.photo && typeof formData.photo !== "string") {
         formDataToSend.append("photo", formData.photo); // Only append if it's a new image file
-      }
-      for (let pair of formDataToSend.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
       }
       // Send the FormData using PATCH request
       http

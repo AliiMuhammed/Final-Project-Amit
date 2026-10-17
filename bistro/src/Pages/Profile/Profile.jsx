@@ -48,7 +48,6 @@ const Profile = () => {
             },
           })
           .then((response) => {
-            console.log(response.data.user);
             dispatch(
               openToast({
                 type: "success",
@@ -72,20 +71,20 @@ const Profile = () => {
     inputElement.click();
   };
   useEffect(() => {
-    setBookings({ ...bookings, loading: true });
+    setBookings((previous) => ({ ...previous, loading: true }));
     http
       .GET(`bookings?user=${user._id}`)
       .then((response) => {
-        setBookings({ ...bookings, loading: false, data: response.data.data });
+        setBookings((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setBookings({
-          ...bookings,
+        setBookings((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
-  }, []);
+  }, [user._id]);
 
   const convertToReadableDate = (isoDate) => {
     const dateObj = new Date(isoDate);
