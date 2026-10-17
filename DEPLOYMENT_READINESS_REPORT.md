@@ -4,15 +4,15 @@ Updated 17 October 2026. Repository: `/home/https_ali_muhammed/Documents/Final-P
 
 ## Executive summary
 
-**BLOCKED — LIVE INTEGRATION INCOMPLETE.** Authorized customer/admin API workflows and browser integration passed against the new Atlas database and Cloudinary. Gmail authentication passed, but actual reset-email delivery remains blocked because no owner-controlled recipient was approved. Vercel execution remains untested because deployment is prohibited. The application's Atlas credential also has excessive privileges that the owner must restrict before release.
+**READY AFTER OWNER CONFIGURATION** for a separately approved isolated Preview; not a production sign-off. Customer/admin integration, Cloudinary and the single authorized live email/password-reset workflow passed. The owner corrected Atlas privileges, which were reverified. The email arrived in Spam with a visible reset button; the owner verified SPF, DKIM and DMARC all PASS. Logo/footer defects are fixed and locally retested, but the revised email has not been sent to Gmail. Inbox placement and hosted HTTPS/Vercel execution remain unverified.
 
-The existing React/CRA, Express, Mongoose, JWT, Cloudinary and SMTP architecture is retained. Four additional issues were corrected: missing unique-index initialization (including retry recovery), tests accidentally loading owner credentials, a login network-error crash, and admin logout retaining its JWT. No permanent administrator, real email, cloud permission change, commit, push, merge, resource provisioning or deployment was performed.
+The existing React/CRA, Express, Mongoose, JWT, Cloudinary and SMTP architecture is retained. Four additional issues were corrected: missing unique-index initialization (including retry recovery), tests accidentally loading owner credentials, a login network-error crash, and admin logout retaining its JWT. A later owner-approved publication created/pushed commit `0887ba77988cde2165614b7340cb67ca63802084` on the feature branch. This email follow-up sent exactly one separately authorized email and made local template/test/documentation changes only. No additional commit/push, permanent administrator, agent-made cloud permission change, merge, resource provisioning or deployment occurred.
 
 Statuses: **PASS — LIVE VERIFIED**, **PASS — LOCAL VERIFIED**, **PASS — MOCKED**, **BLOCKED — OWNER APPROVAL REQUIRED**, **FAIL — REPRODUCED**, **FIXED — RETESTED**, **NOT TESTED**. Local execution is never evidence of Vercel execution. Mocked boundaries are identified below.
 
 ## Git and scope safety
 
-Work remains on `chore/vercel-fullstack-mongodb-migration`. `HEAD` and `main` remain at `a99e7056014a783d0f14112463187be9b6344813`. Existing uncommitted migration work was preserved. Final status: 39 modified tracked files, 24 new files and one staged deletion. The staged deletion of `server/config.env` remains; its ignored local copy is preserved. No history rewrite, reset or broad clean occurred. The previous migration's changes remain part of the handoff; the additional files for this follow-up are listed below.
+Work remains on `chore/vercel-fullstack-mongodb-migration`, at published commit `0887ba77988cde2165614b7340cb67ca63802084`. `main` remains at `a99e7056014a783d0f14112463187be9b6344813`. Current email fixes are uncommitted; no push/commit/merge/deployment was authorized for this follow-up. The earlier 64-file migration/integration handoff was committed and pushed only after separate owner authorization. `server/config.env` is absent from the current Git tree; its ignored local copy is preserved. No history rewrite, reset or broad clean occurred. Unrelated owner IDE files are preserved.
 
 Live writes were separately authorized only for disposable records in `bistro_bliss`, after verifying an initially empty database with zero collections. A second approval allowed changing only the role of the exact run-owned user `6ad39facd9f673c83b19be6c` to `admin`. Identity was checked before promotion. Every test used generated data; no existing user, menu, booking or asset was modified. Email to the synthetic `.invalid` accounts was prohibited and never attempted.
 
@@ -23,10 +23,10 @@ A pre-existing owner backend on port 4000 was preserved. Integration used a sepa
 | Service | Status | Evidence and limit |
 |---|---|---|
 | MongoDB Atlas | **PASS — LIVE VERIFIED** | New SRV DNS, authenticated connection/ping, intended `bistro_bliss` database, real CRUD, schema validation, email unique index and connection reuse. No obsolete-host retry. |
-| Atlas least privilege | **FAIL — REPRODUCED** | Authenticated `bistro-app` effective role is `readWriteAnyDatabase` on `admin`, with wildcard privileges. Owner must replace with `readWrite` on `bistro_bliss` only. No permissions were changed or destructive cross-database probe attempted. |
+| Atlas least privilege | **FIXED — RETESTED** | Owner changed the role. A fresh authenticated effective-role check found exactly `readWrite` on `bistro_bliss`; diagnostic and live customer create/reset/delete passed with the narrowed credential. No agent permission change or destructive cross-database probe occurred. |
 | Cloudinary | **PASS — LIVE VERIFIED** | Admin ping, signed uploads, persistent HTTPS references, actual downloaded optimized JPEG, replacement, compensation after rejected DB writes, deletion and independent resource-absence checks. |
 | Gmail SMTP authentication | **PASS — LIVE VERIFIED** | Nodemailer transport `verify()` accepted configured credentials. This does not prove message delivery. |
-| Actual reset email delivery | **BLOCKED — OWNER APPROVAL REQUIRED** | No approved owner-controlled recipient; no SMTP `sendMail` against Gmail occurred. |
+| Actual reset email delivery | **PASS — LIVE VERIFIED** | Exactly one Gmail SMTP send to the approved owner-controlled recipient, with owner-confirmed receipt in Spam and visible reset button. Original logo/footer defects and post-fix verification limits are documented below. |
 | Vercel functions/CDN | **NOT TESTED** | No project creation, platform build, deployment, function execution or hosted email-link test authorized. |
 
 Local backend configuration contains the required values and validates; values are not reproduced. Frontend development fallback and explicit integration override work. Production compilation uses the non-live `https://api.example.com` origin solely to verify HTTPS build configuration.
@@ -74,9 +74,17 @@ The initial image browser harness tried to read the response body during the pag
 
 ## Email and password reset
 
-**PASS — LIVE VERIFIED** for SMTP authentication only. **PASS — MOCKED** for the complete reset workflow with the SMTP send boundary replaced by an in-memory capture: real Express and Atlas persisted only a hashed reset token with expiration, rendered the configured frontend link and sender, reset the password, rejected the old password, accepted the new password, rejected token reuse/expiry, and cleared reset fields. No token, URL containing a token, password or mail body is published.
+**PASS — LIVE VERIFIED**: the owner separately approved one exact controlled recipient. Before creating an account, fresh checks confirmed zero records and exactly `readWrite@bistro_bliss`. One tagged ordinary customer was created; no existing account was reused or modified. The real application generated the token and sent exactly one message through Gmail SMTP. A persisted send-attempt guard prohibited retries/other recipients. The owner confirmed receipt in **Spam**, a visible reset button, and SPF/DKIM/DMARC **PASS** in Gmail Show original.
 
-The distinction matters: Atlas operations were real, but this combined reset campaign is classified mocked because delivery was simulated. Gmail receipt, spam placement, delivered HTML/logo rendering and an actual hosted HTTPS reset link remain **BLOCKED — OWNER APPROVAL REQUIRED**. Vercel template bundling remains **NOT TESTED** until deployment approval.
+The actual emailed URL opened the real React reset form. After owner confirmation, Chromium submitted a generated new password to the real API/Atlas; browser login accepted it, the old password returned 401, replaying the same token returned 400, and reset metadata was cleared. No passwords, JWTs, raw headers, actual token/link or recipient address are published. Earlier mocked expiry/failure coverage remains separately classified **PASS — MOCKED**.
+
+**FAIL — REPRODUCED** on the delivered original: the logo URL used `PUBLIC_API_URL=http://localhost:4001`, unreachable by Gmail's image fetcher. The shared footer contained a fabricated address and `href="#"` unsubscribe link. **FIXED — RETESTED locally**: the existing logo now travels as a PNG buffer with a matching Content-ID referenced by HTML; the backend function bundle explicitly includes that asset. No remote image host, Cloudinary account or localhost logo URL is needed. The footer now explains that this is an account-security email; it has no invented business details or mailing-list unsubscribe. Subject and body clearly identify the reset, 10-minute validity, single use and unchanged password if ignored. Plain text omits the CID image reference. Actual offline MIME generation and desktop/mobile Chromium rendering passed. This is not a Gmail post-fix rendering claim.
+
+The authenticated From identity, Gmail SMTP credentials and TLS/access restrictions are preserved. No DNS/authentication change was justified by the passing authentication results. Public sender-domain DNS includes SPF and DMARC; DNS presence alone was not treated as message-level authentication. The Gmail connector returned `USER_NOT_LOGGED_IN`, so received authentication results and the classification reason come from the owner's inspection, not direct connector access.
+
+Gmail's reported reason was: the message resembles previously flagged spam. This does not prove a particular account/IP reputation score or identify one template element as the cause. Actual provider reputation metrics were unavailable. Content fixes remove observed defects; they cannot guarantee Inbox placement. [Google sender guidance](https://support.google.com/mail/answer/81126?hl=en-GB) distinguishes authentication, reputation, formatting and marketing/subscription requirements. The current personal Gmail domain is controlled by Google; the app must not invent SPF/DKIM/DMARC headers or DNS records for it. Owner actions: optionally mark this legitimate message as not spam, review provider reputation where available, use approved HTTPS production origins, and approve a separate revised-message test if desired. No second email was sent. See [Nodemailer embedded images](https://nodemailer.com/message/embedded-images) for the CID/buffer mechanism.
+
+**BLOCKED — OWNER APPROVAL REQUIRED**: a second email to validate revised-template Gmail rendering/placement. **NOT TESTED**: hosted HTTPS reset URLs, Vercel template/asset bundling and SMTP egress. Local reset links still intentionally use the configured local frontend; production requires the approved HTTPS `FRONTEND_URL`.
 
 ## Automated verification
 
@@ -84,7 +92,7 @@ Environment: Linux, Node `v24.19.0`, npm `11.17.0`.
 
 | Command/check | Result |
 |---|---|
-| `npm --prefix server test` | **PASS — MOCKED**: 38 tests, zero failures; owner `.env` loading disabled for unit tests. Real local Sharp/model behavior included; service calls stubbed. |
+| `npm --prefix server test` | **PASS — MOCKED**: 42 tests, zero failures; owner `.env` loading disabled for unit tests. Real local Sharp/model behavior included; service calls stubbed. |
 | `npm --prefix server run build` | **PASS — LOCAL VERIFIED**: terminating asset preparation, original uploads copied into `public/legacy`. |
 | `npm --prefix server audit --omit=dev --registry=https://registry.npmjs.org --json` | **PASS — LOCAL VERIFIED**: zero advisories. |
 | `CI=true npm --prefix bistro test -- --watchAll=false --runInBand` | **PASS — MOCKED**: 16 tests in two suites, zero failures. |
@@ -99,14 +107,14 @@ No dependency versions changed during this follow-up; lockfiles were preserved a
 
 ## Security findings and release requirements
 
-1. **Atlas privilege scope — unresolved:** current credential is broader than `bistro_bliss`. Owner must restrict it, then rerun the diagnostic and authorized CRUD/readiness checks. This task did not change cloud permissions. The Atlas network access list itself was not inspected through a control-plane session, so its scope is **NOT TESTED**; successful local connectivity does not prove a safe Vercel network configuration.
+1. **Atlas privilege scope — resolved by owner and retested:** exactly `readWrite@bistro_bliss` was observed; diagnostic and disposable customer/reset/delete checks passed. This task did not change cloud permissions. The Atlas network access list itself was not inspected through a control-plane session, so its scope is **NOT TESTED**; successful local connectivity does not prove a safe Vercel network configuration.
 2. **Frontend advisories — unresolved:** lockfile dependency-graph analysis separates two affected application-runtime packages (`react-router`, `react-router-dom`, moderate) from 102 affected build/test/tooling packages, including CRA. `--omit=dev` alone misclassifies CRA because it is listed in dependencies. Direct affected packages are Router/Router DOM and `react-scripts`; the rest are transitive. Reported fixes require major-version/toolchain decisions. No safe compatible change identified by this audit resolves the remaining families; no force update or framework migration was attempted.
 3. Router advisories include [backslash open redirect](https://github.com/advisories/GHSA-wrjc-x8rr-h8h6) and [SSR hydration constructor injection](https://github.com/advisories/GHSA-337j-9hxr-rhxg). This app uses fixed navigation destinations and client rendering without SSR, so an exploitable path was not demonstrated here. This is limited reachability analysis, not proof of non-exploitability. Tooling advisories can affect untrusted build inputs/development-server exposure. Keep development servers private; review a separately scoped Router/toolchain upgrade or explicitly accept the residual risk for an isolated Preview.
 4. **Credentials:** active database password, JWT secret and Gmail app password differ from historically committed values, checked without displaying them. Independent generation/revocation cannot be proven from value comparison; Cloudinary historical comparison is unavailable. Owner should confirm generation and revocation. Previously committed credentials remain in historical commits and unchanged `main`; no history rewrite was authorized.
 5. **Abuse control:** the in-memory authentication limiter is per instance. Multiple Vercel instances do not share counts. Before production, choose owner-approved managed edge/WAF protection or a shared limit store; no paid resource was provisioned.
 6. Role enforcement, sensitive-field projection, CORS, upload validation, HTTPS-origin configuration and sanitized errors passed their stated checks. Existing local-storage JWTs retain XSS exposure and no global logout-revocation service. This task is not a penetration-test sign-off.
 
-## Additional files changed in this follow-up
+## Files changed across the integration follow-ups
 
 - `server/config/database.js`: connection-time buffering, awaited explicit collection/index readiness and retry recovery.
 - `server/test/database.test.js`: index readiness and failed-index retry regressions.
@@ -115,7 +123,10 @@ No dependency versions changed during this follow-up; lockfiles were preserved a
 - `bistro/src/Pages/Login/Login.jsx`: network-error fallback.
 - `bistro/src/Admin/components/AdminNav/AdminNav.jsx`: remove stored JWT on logout.
 - `bistro/src/App.test.js`: login outage and admin logout regressions.
-- This report and `VERCEL_DEPLOYMENT_GUIDE.md`: replace stale connectivity blockers with observed results and remaining owner actions.
+- `server/utils/email.js`, `server/views/emails/passwordReset.pug`, `server/views/emails/baseEmail.pug`: embedded logo, transactional wording/footer and clear reset subject/plain text; authenticated sender and SMTP settings preserved.
+- `server/vercel.json`: explicitly bundle the logo as well as Pug templates.
+- `server/test/email.test.js`: four regressions for logo/content, unchanged transport safeguards, real offline MIME and function asset inclusion.
+- This report and `VERCEL_DEPLOYMENT_GUIDE.md`: current service evidence, cleanup, deliverability findings and remaining owner actions.
 
 Private test harnesses, generated credentials and fixture images were not added to Git. No dependency version, API envelope, frontend layout or production account was changed in this follow-up.
 
@@ -133,6 +144,8 @@ Private evidence directory: `/tmp/bistro-live-20261017-ZZcrwF0g` (temporary loca
 
 **PASS — LIVE VERIFIED**: all five exact records were deleted, including the temporary administrator. All 11 generated Cloudinary assets (including earlier browser attempts) returned independently verified resource-not-found results. Final record counts are zero in `users`, `menus` and `bookings`; their collections and the unique email index remain. No test records/assets remain. The synthetic credentials file was deleted. The first absence-check harness used the wrong level of Cloudinary's nested 404 error; after correcting the harness, resource absence checks passed. This was a verification issue, not a failed application deletion. No administrator remained to revoke after record cleanup.
 
+Mail follow-up evidence: `/tmp/bistro-mail-20261017-wssmqA/evidence.json`. Disposable user `6ad3a742955c1f79572a2e5c` was verified by exact ID, email, run name and ordinary-customer role, then deleted. All three collection counts are zero; unique email index remains. Exactly one SMTP send occurred, no image/booking/menu asset was created, and private credential/token storage was deleted. No account remains. Local preview artifacts use synthetic identities/links only. Gmail messages/labels were not modified.
+
 ## Vercel readiness and next owner actions
 
 Local configuration matches two independent projects: frontend `bistro-bliss` with root `bistro`, CRA, `npm ci`, `npm run build`, output `build`; backend `bistro-bliss-api` with root `server`, native Express, exported `app.js`, Node 24, `npm ci`, terminating `npm run build`. Email Pug templates are explicitly included; legacy assets are copied into `public`; runtime uploads use memory/Cloudinary, without persistent local writes. Frontend SPA rewrites and exact scoped CORS are implemented.
@@ -141,12 +154,12 @@ Current [Vercel Express](https://vercel.com/docs/frameworks/backend/express), [C
 
 Owner actions, in order:
 
-1. Restrict the app's Atlas database role and review existing network entries; approve any necessary Vercel egress arrangement. Never silently open `0.0.0.0/0` or provision paid networking.
-2. Approve an owner-controlled recipient for one real password-reset delivery workflow, then verify receipt/link/rendering. Synthetic test accounts are deleted and no permanent admin exists; any new test identity needs the corresponding scope approval.
+1. Atlas role restriction is complete. Review existing network entries; approve any necessary Vercel egress arrangement. Never silently open `0.0.0.0/0` or provision paid networking.
+2. Live reset delivery/password/single-use verification is complete. Before production, approve a separate revised-message Gmail rendering/placement test if desired and assess the remaining deliverability limits. No further mail is authorized. Test accounts are deleted; any new identity requires the corresponding scope approval.
 3. Confirm rotation/revocation provenance and decide remediation or isolated-Preview risk acceptance for frontend advisories. Production also requires effective distributed abuse protection.
 4. Configure separate backend/frontend Preview secrets and exact HTTPS aliases as described in the guide. Prefer an explicitly approved local CLI Preview of the existing feature branch without a Git push. Project creation/import and deployment require separate authorization.
 5. Authorize the two Preview deployments, then perform the guide's hosted smoke/integration checks before any Production decision.
 
-**Final decision: BLOCKED — LIVE INTEGRATION INCOMPLETE.** No unresolved application failure was hidden, but actual email delivery and platform execution have no live evidence. This is neither a production sign-off nor deployment authorization.
+**Final decision: READY AFTER OWNER CONFIGURATION.** The previously missing live reset workflow and least-privilege check now pass. Preview still requires approved HTTPS origins, safe networking, dependency-risk decisions and explicit deployment authorization. Revised-template Gmail rendering/Inbox placement and platform execution remain unverified. This is not production sign-off.
 
 Methods used: Ponytail and Superpowers planning/debugging/TDD/verification/review workflows; shell, Playwright and official-document web research. A Valyu lookup returned no useful supporting evidence and was not relied on. Final read-only review found no material unresolved code or documentation finding.

@@ -2,7 +2,8 @@ const nodemailer = require("nodemailer");
 const pug = require("pug");
 const { htmlToText } = require("html-to-text");
 const path = require("path");
-const { validateEnvironment } = require("../config/environment");
+const { readFileSync } = require("fs");
+require("../config/environment");
 
 module.exports = class Email {
   constructor(user, url) {
@@ -13,7 +14,8 @@ module.exports = class Email {
   }
 
   newTransport() {
-    if (!process.env.NODEMAILER_USER || !process.env.NODEMAILER_PASSWORD) throw new Error("Email delivery is not configured.");
+    if (!process.env.NODEMAILER_USER || !process.env.NODEMAILER_PASSWORD)
+      throw new Error("Email delivery is not configured.");
     return nodemailer.createTransport({
       host: "smtp.gmail.com",
       service: "Gmail",
@@ -29,20 +31,19 @@ module.exports = class Email {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASSWORD,
       },
-
-
     });
   }
 
   async send(template, subject) {
+    const logoCid = "bistro-bliss-logo";
     const html = pug.renderFile(
       path.join(__dirname, `../views/emails/${template}.pug`),
       {
         firstName: this.firstName,
         url: this.url,
         subject,
-        logoUrl: `${validateEnvironment().publicApiUrl}/bistro-logo.png`,
-      }
+        logoUrl: `cid:${logoCid}`,
+      },
     );
 
     const mailOptions = {
@@ -50,7 +51,20 @@ module.exports = class Email {
       to: this.to,
       subject,
       html,
-      text: htmlToText(html),
+      text: htmlToText(html, {
+        selectors: [{ selector: "img", format: "skip" }],
+      }),
+      attachments: [
+        {
+          filename: "bistro-logo.png",
+          content: readFileSync(
+            path.join(__dirname, "../public/bistro-logo.png"),
+          ),
+          contentType: "image/png",
+          contentDisposition: "inline",
+          cid: logoCid,
+        },
+      ],
     };
 
     await this.newTransport().sendMail(mailOptions);
@@ -61,10 +75,7 @@ module.exports = class Email {
   }
 
   async sendPasswordReset() {
-    await this.send(
-      "passwordReset",
-      "Your password reset token (valid for only 10 minutes)"
-    );
+    await this.send("passwordReset", "Reset your Bistro Bliss password");
   }
 
   async sendVerified() {
