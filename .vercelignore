@@ -1,0 +1,12 @@
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/config.env
+**/.vercel/
+**/.idea/
+**/coverage/
+**/*.log
+bistro/build/
+server/public/legacy/
+server/test/

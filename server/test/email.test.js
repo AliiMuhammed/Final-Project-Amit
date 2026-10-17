@@ -85,10 +85,15 @@ test("real MIME generation embeds logo bytes with file and URL access disabled",
   assert.match(raw, /From: Bistro Bliss <sender@gmail.com>/i);
 });
 
-test("Vercel function includes the logo used by MIME generation", () => {
+test("Vercel function uses a string glob that includes mail templates and logo", () => {
   const config = require("../vercel.json");
   const includes = config.functions["app.js"].includeFiles;
-  assert(
-    Array.isArray(includes) && includes.includes("public/bistro-logo.png"),
-  );
+  assert.equal(typeof includes, "string", "Vercel requires a string glob");
+  const root = path.join(__dirname, "..");
+  const included = fs.globSync(includes, { cwd: root });
+  for (const file of [
+    "public/bistro-logo.png",
+    ...fs.globSync("views/emails/**/*.pug", { cwd: root }),
+  ])
+    assert(included.includes(file), `function asset missing: ${file}`);
 });

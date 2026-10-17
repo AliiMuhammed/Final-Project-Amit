@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "express",
   "functions": {
-    "app.js": { "includeFiles": ["views/emails/**", "public/bistro-logo.png"] }
+    "app.js": { "includeFiles": "{views/emails/**,public/bistro-logo.png}" }
   },
   "headers": [
     {
