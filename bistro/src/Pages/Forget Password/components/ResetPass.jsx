@@ -41,7 +41,6 @@ const ResetPass = () => {
           passwordConfirm: passwordConfirm,
         })
         .then((res) => {
-          console.log(res);
           setLoading(false);
           dispatch(
             openToast({
@@ -52,11 +51,10 @@ const ResetPass = () => {
           navigate("/login");
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
           dispatch(
             openToast({
-              msg: err ? err.response.data.message : "Something went wrong",
+              msg: err.response?.data?.message || "Unable to reach the service. Please try again.",
               type: "error",
             })
           );

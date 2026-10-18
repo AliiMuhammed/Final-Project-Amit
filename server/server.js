@@ -1,99 +1,33 @@
 #!/usr/bin/env node
-
+// Local listener only. Vercel loads app.js directly.
+const app = require("./app");
+const { connectDatabase } = require("./config/database");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-
-process.on("uncaughtException", (err) => {
-  console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
-  console.log(err.name, err.message);
-  process.exit(1);
-});
-
-var app = require("./app");
-var debug = require("debug")("server:server");
-var http = require("http");
-
-dotenv.config({ path: "./config.env" });
-
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
-
-mongoose
-  .connect(DB, {})
-  .then(() => console.log("DB Connected"))
-  .catch((error) => {
-    console.error("Error connecting to the database:", error.message);
+async function start() {
+  await connectDatabase();
+  const port = Number(process.env.PORT || 4000);
+  const server = app.listen(port, () =>
+    console.log(`Bistro Bliss API listening on port ${port}`),
+  );
+  server.on("error", async () => {
+    console.error("HTTP server could not start.");
+    await mongoose.disconnect();
+    process.exitCode = 1;
   });
-
-var port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
-
-var server = http.createServer(app);
-
-// Import the cron job function
-// const startCronJob = require("./controllers/dailyTasks");
-
-// Start the cron job
-// startCronJob();
-
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
-
-process.on("unhandledRejection", (err) => {
-  console.log("UNHANDLED REJECTION! 💥 Shutting down...");
-  console.log(err.name, err.message);
-  server.close(() => {
-    process.exit(1);
+  process.on("SIGTERM", () =>
+    server.close(async () => {
+      await mongoose.disconnect();
+    }),
+  );
+  process.on("SIGINT", () =>
+    server.close(async () => {
+      await mongoose.disconnect();
+    }),
+  );
+}
+module.exports = app;
+if (require.main === module)
+  start().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
   });
-});
-
-process.on("SIGTERM", () => {
-  console.log("SIGTERM RECEIVED, Shutting down gracefully...");
-  server.close(() => {
-    console.log("Process terminated!");
-  });
-});
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    return val;
-  }
-
-  if (port >= 0) {
-    return port;
-  }
-
-  return false;
-}
-
-function onError(error) {
-  if (error.syscall !== "listen") {
-    throw error;
-  }
-
-  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
-
-  switch (error.code) {
-    case "EACCES":
-      console.error(bind + " requires elevated privileges");
-      process.exit(1);
-      break;
-    case "EADDRINUSE":
-      console.error(bind + " is already in use");
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-  debug("Listening on " + bind);
-}

@@ -50,7 +50,7 @@ const ForgetPass = () => {
           setLoading(false);
           dispatch(
             openToast({
-              msg: err ? err.response.data.message : "Something went wrong",
+              msg: err.response?.data?.message || "Unable to reach the service. Please try again.",
               type: "error",
             })
           );

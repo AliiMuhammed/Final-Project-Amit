@@ -24,7 +24,6 @@ const BookingTable = ({ headers, data }) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loadingRows, setLoadingRows] = useState({}); // Track loading for each row and button
   const dispatch = useDispatch();
-  console.log(data);
   const handleChangePage = (_, newPage) => setPage(newPage);
 
   const handleChangeRowsPerPage = (event) => {

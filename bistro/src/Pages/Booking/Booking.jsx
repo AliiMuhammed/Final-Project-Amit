@@ -95,7 +95,6 @@ const Booking = () => {
           setErrors({});
           dispatch(openToast({ msg: "Something went wrong", type: "error" }));
         });
-      console.log("Form submitted successfully", formattedValues);
     }
   };
 

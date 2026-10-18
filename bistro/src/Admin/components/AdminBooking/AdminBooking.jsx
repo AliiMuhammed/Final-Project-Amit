@@ -14,18 +14,18 @@ const AdminBooking = () => {
   });
 
   useEffect(() => {
-    setBooking({ ...booking, loading: true });
+    setBooking((previous) => ({ ...previous, loading: true }));
     http
       .GET("bookings")
       .then((response) => {
-        setBooking({ ...booking, loading: false, data: response.data.data });
+        setBooking((previous) => ({ ...previous, loading: false, data: response.data.data }));
       })
       .catch((err) => {
-        setBooking({
-          ...booking,
+        setBooking((previous) => ({
+          ...previous,
           loading: false,
-          errMsg: err.response?.data?.message,
-        });
+          errMsg: err.response?.data?.message || "Unable to reach the service. Please try again.",
+        }));
       });
   }, [refreshCount]);
   return (

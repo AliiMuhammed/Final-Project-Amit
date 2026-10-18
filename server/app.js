@@ -1,97 +1,82 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const { validateEnvironment } = require("./config/environment");
+const config = validateEnvironment();
+const express = require("express");
+const path = require("path");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
-const hpp = require("hpp");
 const cors = require("cors");
 const compression = require("compression");
-
+const { connectDatabase } = require("./config/database");
 const AppError = require("./utils/appError");
-const globalErrorHandler = require("./controllers/errorController");
-var usersRouter = require("./routes/users");
-var menuRouter = require("./routes/menu");
-var bookingsRouter = require("./routes/bookings");
-
-var app = express();
-
-app.enable("trust proxy");
-
+const app = express();
+// Vercel supplies the forwarding proxy; direct local requests do not trust it.
+app.set("trust proxy", process.env.VERCEL ? 1 : false);
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin(origin, done) {
+      done(
+        origin && origin !== config.frontendUrl
+          ? new AppError("Origin is not allowed.", 403)
+          : null,
+        true,
+      );
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
+  }),
 );
-
-app.use(helmet()); // Set security HTTP headers
-
-// Limit requests from same API
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this IP, please try again in an hour.",
-});
-app.use("/login", limiter);
-
-// View engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static("upload"));
-
-// Log requests
-app.use(logger("dev"));
-
-// Parse JSON and URL-encoded data
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-// Data sanitization against NoSQL query injection
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+app.use(express.json({ limit: "100kb" }));
+app.use(express.urlencoded({ extended: false, limit: "100kb" }));
 app.use(mongoSanitize());
-
-// Data sanitization against XSS
-app.use(xss());
-
-// Prevent parameter pollution
-// app.use(hpp({
-//   whitelist: []
-// }));
-
-// Parse cookies
-app.use(cookieParser());
-
-// Compression
 app.use(compression());
-app.use(express.static("upload"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/legacy", express.static(path.join(__dirname, "upload")));
 
-app.use("/users", usersRouter);
-app.use("/menu", menuRouter);
-app.use("/bookings", bookingsRouter);
-
-// Catch 404 and forward to error handler
-app.all("*", (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+app.get("/health", (req, res) =>
+  res.json({ status: "ok", database: "not_checked" }),
+);
+app.get("/health/db", async (req, res, next) => {
+  try {
+    const db = await connectDatabase();
+    await db.connection.db.admin().command({ ping: 1 });
+    res.json({ status: "ok", database: "connected" });
+  } catch {
+    next(new AppError("Database unavailable. Please try again later.", 503));
+  }
 });
-
-// Global error handler
-app.use(globalErrorHandler);
-
-// Error handler
-app.use(function (err, req, res, next) {
-  // Set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // Render the error page
-  res.status(err.status || 500);
-  res.render("error");
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 20,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: {
+    status: "fail",
+    message: "Too many attempts. Please try again later.",
+  },
 });
-
+// shortcut: counters are per function instance, use Vercel WAF or a shared store before public high-traffic use.
+app.use(
+  [
+    "/users/login",
+    "/users/signup",
+    "/users/forgotPassword",
+    "/users/resetPassword",
+  ],
+  authLimiter,
+);
+app.use(["/users", "/menu", "/bookings"], async (req, res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+app.use("/users", require("./routes/users"));
+app.use("/menu", require("./routes/menu"));
+app.use("/bookings", require("./routes/bookings"));
+app.all("*", (req, res, next) => next(new AppError("Route not found.", 404)));
+app.use(require("./controllers/errorController"));
 module.exports = app;
