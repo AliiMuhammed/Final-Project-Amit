@@ -76,7 +76,7 @@
 
 # Live Demo
 
-You can find Bistro Bliss without back-end live at [https://bistro-bliss-template.netlify.app/]
+You can find Bistro Bliss without back-end live at [https://bistro-bliss-drab.vercel.app/]
 # Run Locally
 
 Use Node 24 and the existing checkout. See [VERCEL_DEPLOYMENT_GUIDE.md](VERCEL_DEPLOYMENT_GUIDE.md) for new Atlas, Cloudinary, environment setup, local commands and the two Vercel projects. No cloud resources are created automatically.
