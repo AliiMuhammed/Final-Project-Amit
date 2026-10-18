@@ -1,7 +1,7 @@
 <img src="https://github.com/user-attachments/assets/f835ddd5-76c7-47ab-a5e7-680551b5cfb1" alt="Logo" width="50%">
 
 #### Bistro Bliss is a user-friendly web app designed for restaurant lovers. It lets you explore the restaurant’s menu, book a table easily, and create an account to keep track of your bookings. Bistro Bliss makes dining out simple and stress-free!
-
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/bistro-bliss-drab)
 
 # Features
 
@@ -31,7 +31,7 @@
   <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
   <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript">
 </span>
-
+<img src="https://img.shields.io/badge/Vercel-%23000000.svg?logo=vercel&logoColor=white" alt='vercel'>
 #### __For Back End:__
 <span>
   <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="NodeJS">
